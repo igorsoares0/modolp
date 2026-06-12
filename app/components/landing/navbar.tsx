@@ -51,12 +51,6 @@ export function Navbar() {
         <div className="hidden items-center gap-2 md:flex">
           <a
             href="#"
-            className="rounded-lg px-4 py-2 font-body text-sm font-medium text-ink-secondary transition-colors hover:text-ink-primary"
-          >
-            Sign in
-          </a>
-          <a
-            href="#"
             className="rounded-lg bg-accent-green px-4 py-2 font-display text-sm font-semibold text-surface-0 transition-all duration-200 hover:bg-accent-green-hover hover:shadow-[0_0_24px_rgba(52,211,153,0.25)]"
           >
             Start for free
@@ -117,12 +111,6 @@ export function Navbar() {
           ))}
 
           <div className="mt-auto flex flex-col gap-3 pt-6">
-            <a
-              href="#"
-              className="rounded-lg border border-line-default bg-surface-2 px-5 py-3 text-center font-body text-sm font-medium text-ink-primary"
-            >
-              Sign in
-            </a>
             <a
               href="#"
               className="rounded-lg bg-accent-green px-5 py-3 text-center font-display text-sm font-semibold text-surface-0"
