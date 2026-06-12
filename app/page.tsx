@@ -479,7 +479,11 @@ export default function Home() {
                     </li>
                   ))}
                 </ul>
-                <PrimaryButton href="#" className="mt-8 w-full">
+                <PrimaryButton
+                  href="https://app.getmodo.pro"
+                  target="_blank"
+                  className="mt-8 w-full"
+                >
                   Get lifetime access — $47
                 </PrimaryButton>
               </Reveal>
