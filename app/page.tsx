@@ -154,7 +154,7 @@ export default function Home() {
             </p>
 
             <div className="mt-8 flex animate-fade-in flex-col items-center gap-3 sm:flex-row [animation-delay:240ms]">
-              <PrimaryButton href="#pricing">
+              <PrimaryButton href="https://app.getmodo.pro" target="_blank">
                 Start designing for free
               </PrimaryButton>
               <GhostButton href="#features">See templates →</GhostButton>
@@ -432,7 +432,11 @@ export default function Home() {
                     </li>
                   ))}
                 </ul>
-                <GhostButton href="#" className="mt-8 w-full">
+                <GhostButton
+                  href="https://app.getmodo.pro"
+                  target="_blank"
+                  className="mt-8 w-full"
+                >
                   Get started free
                 </GhostButton>
               </Reveal>
@@ -513,7 +517,9 @@ export default function Home() {
               the next 10 minutes. No install. No tutorial. Just design.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <PrimaryButton href="#">Start for free</PrimaryButton>
+              <PrimaryButton href="https://app.getmodo.pro" target="_blank">
+                Start for free
+              </PrimaryButton>
               <GhostButton href="#features">View all templates →</GhostButton>
             </div>
             <p className="mt-4 font-body text-sm text-ink-ghost">

@@ -20,12 +20,26 @@ type ButtonProps = {
   href?: string;
   children: ReactNode;
   className?: string;
+  target?: string;
 };
 
-export function PrimaryButton({ href = "#", children, className = "" }: ButtonProps) {
+/** Adds safe rel when opening in a new tab. */
+function externalProps(target?: string) {
+  return target === "_blank"
+    ? { target, rel: "noopener noreferrer" }
+    : { target };
+}
+
+export function PrimaryButton({
+  href = "#",
+  children,
+  className = "",
+  target,
+}: ButtonProps) {
   return (
     <a
       href={href}
+      {...externalProps(target)}
       className={`inline-flex items-center justify-center rounded-lg bg-accent-green px-6 py-3 font-display text-sm font-semibold text-surface-0 transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-accent-green-hover hover:shadow-[0_0_32px_rgba(52,211,153,0.25)] ${className}`}
     >
       {children}
@@ -33,10 +47,16 @@ export function PrimaryButton({ href = "#", children, className = "" }: ButtonPr
   );
 }
 
-export function GhostButton({ href = "#", children, className = "" }: ButtonProps) {
+export function GhostButton({
+  href = "#",
+  children,
+  className = "",
+  target,
+}: ButtonProps) {
   return (
     <a
       href={href}
+      {...externalProps(target)}
       className={`inline-flex items-center justify-center rounded-lg border border-line-default bg-surface-2 px-5 py-2.5 font-body text-sm font-medium text-ink-primary transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-line-strong hover:bg-surface-3 ${className}`}
     >
       {children}
