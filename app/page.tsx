@@ -535,21 +535,33 @@ export default function Home() {
           <div className="flex items-center gap-2">
             <LogoIcon />
             <span className="font-body text-sm text-ink-ghost">
-              © 2026 Modo. All rights reserved.
+              © 2026 Modo Design. All rights reserved.
             </span>
           </div>
           <div className="flex items-center gap-6">
             <a
-              href="#"
+              href="/terms"
               className="font-body text-sm text-ink-ghost transition-colors hover:text-ink-secondary"
             >
               Terms
             </a>
             <a
-              href="#"
+              href="/privacy"
               className="font-body text-sm text-ink-ghost transition-colors hover:text-ink-secondary"
             >
               Privacy
+            </a>
+            <a
+              href="/refund"
+              className="font-body text-sm text-ink-ghost transition-colors hover:text-ink-secondary"
+            >
+              Refunds
+            </a>
+            <a
+              href="mailto:contact@getmodo.pro"
+              className="font-body text-sm text-ink-ghost transition-colors hover:text-ink-secondary"
+            >
+              Contact
             </a>
           </div>
         </div>
