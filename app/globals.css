@@ -1,26 +1,138 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  /* Surfaces (dark-first) */
+  --color-surface-0: #0c0c0c;
+  --color-surface-1: #141414;
+  --color-surface-2: #1a1a1a;
+  --color-surface-3: #222222;
+  --color-surface-4: #2a2a2a;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  /* Borders */
+  --color-line-subtle: #ffffff08;
+  --color-line-default: #ffffff12;
+  --color-line-strong: #ffffff20;
+
+  /* Text */
+  --color-ink-primary: #e8e8e8;
+  --color-ink-secondary: #9a9a9a;
+  --color-ink-tertiary: #757575;
+  --color-ink-ghost: #636363;
+
+  /* Accents */
+  --color-accent-green: #34d399;
+  --color-accent-green-hover: #6ee7b7;
+  --color-accent-pink: #f472b6;
+  --color-accent-blue: #60a5fa;
+
+  /* Fonts (wired in layout.tsx) */
+  --font-display: var(--font-dm-sans);
+  --font-body: var(--font-inter-tight);
+
+  /* Type scale */
+  --text-display-xl: 4.5rem;   /* 72px */
+  --text-display-lg: 3rem;     /* 48px */
+  --text-display-md: 2rem;     /* 32px */
+
+  /* Spring easing shared by every keyframe */
+  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --animate-fade-in: fade-in 0.4s var(--ease-spring) both;
+  --animate-scale-in: scale-in 0.5s var(--ease-spring) both;
+  --animate-canvas-appear: canvas-appear 0.7s var(--ease-spring) both;
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes scale-in {
+    from {
+      opacity: 0;
+      transform: scale(0.96);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes canvas-appear {
+    from {
+      opacity: 0;
+      transform: scale(0.92);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
   }
 }
 
+:root {
+  color-scheme: dark;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-surface-0);
+  color: var(--color-ink-primary);
+  font-family: var(--font-body), Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: #34d39940;
+  color: #fff;
+}
+
+/* Background dot grid — hero texture + canvas backdrop */
+.canvas-grid {
+  background-image: radial-gradient(circle, #ffffff06 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Reveal-on-scroll: hidden until the IntersectionObserver adds .is-visible */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 0.6s var(--ease-spring),
+    transform 0.6s var(--ease-spring);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* Hide scrollbar on the horizontally-scrolling social proof bar (mobile) */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
