@@ -1,0 +1,15 @@
+node_modules
+.next
+.git
+.gitignore
+npm-debug.log*
+README.md
+AGENTS.md
+CLAUDE.md
+landing-copy.md
+landing-page-spec.md
+*.local
+.env*
+.DS_Store
+Dockerfile
+.dockerignore
