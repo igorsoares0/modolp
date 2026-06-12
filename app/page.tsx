@@ -1,7 +1,7 @@
+import Image from "next/image";
 import { Navbar } from "./components/landing/navbar";
 import { Faq } from "./components/landing/faq";
 import { Reveal } from "./components/landing/reveal";
-import { EditorMock } from "./components/landing/editor-mock";
 import {
   Badge,
   Eyebrow,
@@ -167,7 +167,16 @@ export default function Home() {
 
           {/* Hero visual */}
           <div className="relative mt-16 w-full max-w-5xl animate-canvas-appear [animation-delay:360ms]">
-            <EditorMock />
+            <Image
+              src="/demo.png"
+              alt="The Modo editor with an Instagram post open on the canvas"
+              width={1918}
+              height={857}
+              priority
+              fetchPriority="high"
+              sizes="(max-width: 1024px) 100vw, 1024px"
+              className="h-auto w-full rounded-xl border border-line-default shadow-[0_40px_80px_rgba(0,0,0,0.7)]"
+            />
             <div className="mt-5 flex flex-wrap justify-center gap-2">
               {["1080×1080", "1080×1920", "1000×1500"].map((fmt) => (
                 <span
