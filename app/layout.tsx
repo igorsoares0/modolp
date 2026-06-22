@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { DM_Sans, Inter_Tight } from "next/font/google";
 import "./globals.css";
+import { SITE_URL } from "./lib/site";
 
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
@@ -17,15 +18,26 @@ const interTight = Inter_Tight({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://modo.app"),
+  metadataBase: new URL(SITE_URL),
   title: "Modo — Browser-Based Design Editor for Social Media",
   description:
     "Create stunning Instagram posts, stories, Pinterest graphics, and marketing visuals in your browser. No download. No monthly fees. Try Modo free.",
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
+    type: "website",
+    siteName: "Modo",
+    url: "/",
     title: "Design beautiful social media graphics — in minutes.",
     description:
       "Modo is the fast, browser-based design editor. Templates, assets, layers, and high-res export — all without leaving your browser.",
-    images: ["/og-image.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Design beautiful social media graphics — in minutes.",
+    description:
+      "Modo is the fast, browser-based design editor. Templates, assets, layers, and high-res export — all without leaving your browser.",
   },
 };
 

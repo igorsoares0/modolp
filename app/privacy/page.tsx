@@ -4,6 +4,7 @@ import { LegalPage } from "../components/legal/legal-page";
 export const metadata: Metadata = {
   title: "Privacy Policy — Modo",
   description: "How Modo handles your data. Local-first by design — your projects stay on your device.",
+  alternates: { canonical: "/privacy" },
 };
 
 export default function PrivacyPage() {

@@ -4,6 +4,7 @@ import { LegalPage } from "../components/legal/legal-page";
 export const metadata: Metadata = {
   title: "Refund Policy — Modo",
   description: "Modo's refund and cancellation policy for purchases made through Paddle.",
+  alternates: { canonical: "/refund" },
 };
 
 export default function RefundPage() {

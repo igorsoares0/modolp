@@ -4,6 +4,7 @@ import { LegalPage } from "../components/legal/legal-page";
 export const metadata: Metadata = {
   title: "Terms of Service — Modo",
   description: "The terms and conditions for using Modo, the browser-based design editor.",
+  alternates: { canonical: "/terms" },
 };
 
 export default function TermsPage() {
