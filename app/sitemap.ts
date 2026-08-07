@@ -4,7 +4,7 @@ import { SITE_URL } from "./lib/site";
 const baseUrl = SITE_URL;
 
 // Legal pages share this "last updated" date (see app/*/page.tsx).
-const legalUpdated = new Date("2026-06-11");
+const legalUpdated = new Date("2026-08-07");
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [

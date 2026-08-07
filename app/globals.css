@@ -1,45 +1,160 @@
 @import "tailwindcss";
 
+/* ─────────────────────────────────────────────────────────────────────
+   Raw token values — Daylight/Íris. Light IS the theme; dark is opt-in.
+
+   Dark applies only under `.dark` on the root element, exactly as in
+   designdocs/design-tokens.md §Snippet. It is deliberately NOT wired to
+   `prefers-color-scheme`: the landing is a light-first page and must not
+   flip to dark just because the visitor's OS is.
+
+   These literals live HERE and nowhere else. `@theme inline` below only
+   *aliases* them for Tailwind. Declaring a literal inside `@theme inline`
+   makes Tailwind inline it at build time, and the `.dark` block never
+   reaches it — the theme breaks silently.
+   ───────────────────────────────────────────────────────────────────── */
+:root {
+  color-scheme: light;
+
+  /* Surfaces — elevation is a step of luminance, never a shadow.
+     In light, surface-3 is *darker* than surface-2 on purpose: an input
+     sinks into a white card. */
+  --surface-0: #eceae5;
+  --surface-1: #f7f6f3;
+  --surface-2: #ffffff;
+  --surface-3: #f4f2ee;
+  --surface-4: #eeece7;
+
+  /* Borders — black alphas in light, white alphas in dark */
+  --border-subtle: rgb(0 0 0 / 0.06);
+  --border-default: rgb(0 0 0 / 0.08);
+  --border-strong: rgb(0 0 0 / 0.14);
+
+  /* Text — four steps, and most copy is NOT primary.
+     Neither pure black nor pure white; both are deliberate. */
+  --text-primary: #1b1a18;
+  --text-secondary: #6b6862;
+  --text-tertiary: #8b877f;
+  --text-ghost: #a5a09a;
+
+  /* Accent — iris. The only accent with meaning: primary action, focus,
+     emphasis. It loses that job the moment two unrelated things are iris. */
+  --accent: #5b5bd6;
+  --accent-hover: #4a4ac4;
+  --accent-fg: #ffffff; /* text ON accent — never surface-0 */
+  --accent-tint: #f0ecff;
+  --accent-tint-fg: #4a45b8;
+
+  /* Categorical, not state. Success is NOT the accent — "saved" is
+     information, not an action. Only the editor mock uses these. */
+  --danger: #c9553d;
+  --danger-tint: #fdf3f1;
+  --success: #5f8f6c;
+  --warning: #b8823a;
+
+  /* Dot grid behind hero / final CTA */
+  --canvas-dot: rgb(0 0 0 / 0.055);
+
+  /* Anchored surfaces take a border and no shadow; only what really
+     floats takes a shadow. */
+  --sh-raise: 0 1px 3px rgb(0 0 0 / 0.06);
+  --sh-pop: 0 8px 24px rgb(0 0 0 / 0.16);
+  --sh-modal: 0 14px 40px rgb(0 0 0 / 0.16);
+  --sh-canvas:
+    0 18px 50px rgb(0 0 0 / 0.13), 0 2px 6px rgb(0 0 0 / 0.06);
+}
+
+.dark {
+  color-scheme: dark;
+
+  --surface-0: #0e0e10;
+  --surface-1: #161619;
+  --surface-2: #1c1c20;
+  --surface-3: #141417;
+  --surface-4: #26262b;
+
+  --border-subtle: #ffffff0d;
+  --border-default: #ffffff12;
+  --border-strong: #ffffff24;
+
+  --text-primary: #ededf0;
+  --text-secondary: #9a9aa3;
+  --text-tertiary: #7d7d86;
+  --text-ghost: #5c5c65;
+
+  --accent: #8b8bf5;
+  --accent-hover: #a5a5f8;
+  --accent-fg: #12121a;
+  --accent-tint: #8b8bf51f;
+  --accent-tint-fg: #a5a5f8;
+
+  --danger: #e0836f;
+  --danger-tint: #c9553d1f;
+  --success: #8fbf9a;
+  --warning: #d9a75c;
+
+  --canvas-dot: rgb(255 255 255 / 0.05);
+
+  --sh-raise: 0 1px 3px rgb(0 0 0 / 0.4);
+  --sh-pop: 0 12px 30px rgb(0 0 0 / 0.6);
+  --sh-modal: 0 24px 60px rgb(0 0 0 / 0.55);
+  --sh-canvas: 0 24px 60px rgb(0 0 0 / 0.55);
+}
+
 @theme inline {
-  /* Surfaces (dark-first) */
-  --color-surface-0: #0c0c0c;
-  --color-surface-1: #141414;
-  --color-surface-2: #1a1a1a;
-  --color-surface-3: #222222;
-  --color-surface-4: #2a2a2a;
+  --color-surface-0: var(--surface-0);
+  --color-surface-1: var(--surface-1);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-surface-4: var(--surface-4);
 
-  /* Borders */
-  --color-line-subtle: #ffffff08;
-  --color-line-default: #ffffff12;
-  --color-line-strong: #ffffff20;
+  /* Utility names match the app: border-border-default, text-text-primary. */
+  --color-border-subtle: var(--border-subtle);
+  --color-border-default: var(--border-default);
+  --color-border-strong: var(--border-strong);
 
-  /* Text */
-  --color-ink-primary: #e8e8e8;
-  --color-ink-secondary: #9a9a9a;
-  --color-ink-tertiary: #757575;
-  --color-ink-ghost: #636363;
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-tertiary: var(--text-tertiary);
+  --color-text-ghost: var(--text-ghost);
 
-  /* Accents */
-  --color-accent-green: #34d399;
-  --color-accent-green-hover: #6ee7b7;
-  --color-accent-pink: #f472b6;
-  --color-accent-blue: #60a5fa;
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-fg: var(--accent-fg);
+  --color-accent-tint: var(--accent-tint);
+  --color-accent-tint-fg: var(--accent-tint-fg);
 
-  /* Fonts (wired in layout.tsx) */
-  --font-display: var(--font-dm-sans);
-  --font-body: var(--font-inter-tight);
+  --color-danger: var(--danger);
+  --color-danger-tint: var(--danger-tint);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
 
-  /* Type scale */
-  --text-display-xl: 4.5rem;   /* 72px */
-  --text-display-lg: 3rem;     /* 48px */
-  --text-display-md: 2rem;     /* 32px */
+  --shadow-raise: var(--sh-raise);
+  --shadow-pop: var(--sh-pop);
+  --shadow-modal: var(--sh-modal);
+  --shadow-canvas: var(--sh-canvas);
 
-  /* Spring easing shared by every keyframe */
-  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+  /* The system's radius scale — NOT Tailwind's defaults (2/6/8/12px).
+     Buttons and inputs md, cards lg, large surfaces xl. */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 11px;
+  --radius-xl: 14px;
 
-  --animate-fade-in: fade-in 0.4s var(--ease-spring) both;
-  --animate-scale-in: scale-in 0.5s var(--ease-spring) both;
-  --animate-canvas-appear: canvas-appear 0.7s var(--ease-spring) both;
+  /* Chrome fonts (wired in layout.tsx). Playfair is a *document* font —
+     it only ever renders inside the editor mock artwork, never in UI. */
+  --font-display: var(--font-instrument-sans);
+  --font-body: var(--font-instrument-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-doc-serif: var(--font-playfair);
+
+  /* One easing for everything */
+  --ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --animate-fade-in: fade-in 0.4s var(--ease-standard) both;
+  --animate-scale-in: scale-in 0.5s var(--ease-standard) both;
+  --animate-canvas-appear: canvas-appear 0.7s var(--ease-standard) both;
+  --animate-caret: caret 1s steps(1) infinite;
 
   @keyframes fade-in {
     from {
@@ -73,27 +188,65 @@
       transform: scale(1);
     }
   }
+
+  @keyframes caret {
+    0%,
+    49% {
+      opacity: 1;
+    }
+    50%,
+    100% {
+      opacity: 0;
+    }
+  }
 }
 
-:root {
-  color-scheme: dark;
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--color-surface-0);
-  color: var(--color-ink-primary);
-  font-family: var(--font-body), Arial, Helvetica, sans-serif;
+  color: var(--color-text-primary);
+  font-family: var(--font-body), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
 ::selection {
-  background: #34d39940;
-  color: #fff;
+  background: color-mix(in srgb, var(--accent) 25%, transparent);
 }
 
-/* Background dot grid — hero texture + canvas backdrop */
-.canvas-grid {
-  background-image: radial-gradient(circle, #ffffff06 1px, transparent 1px);
+/* ── Landing type scale ───────────────────────────────────────────────
+   The app's chrome scale tops out at 20px; a landing needs more headroom.
+   Same font, same logic — 600 is the ceiling, weight never goes to 700.
+   Prefixed `type-` so it can't collide with Tailwind's `text-*`. */
+.type-display-xl {
+  font-size: clamp(2.375rem, 6.4vw, 4.25rem); /* 38 → 68px */
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+
+.type-display-lg {
+  font-size: clamp(1.6875rem, 4vw, 2.75rem); /* 27 → 44px */
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+.type-display-md {
+  font-size: clamp(1.5rem, 2.4vw, 1.875rem); /* 24 → 30px */
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+/* Background dot grid — hero texture + final CTA backdrop */
+.canvas-dots {
+  background-image: radial-gradient(
+    circle,
+    var(--canvas-dot) 1px,
+    transparent 1px
+  );
   background-size: 24px 24px;
 }
 
@@ -107,11 +260,15 @@ body {
   opacity: 1;
   transform: translateY(0);
   transition:
-    opacity 0.6s var(--ease-spring),
-    transform 0.6s var(--ease-spring);
+    opacity 0.6s var(--ease-standard),
+    transform 0.6s var(--ease-standard);
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
   .reveal,
   .reveal.is-visible {
     opacity: 1;
@@ -135,7 +292,7 @@ body {
   font-family: var(--font-display), sans-serif;
   font-size: 1.25rem;
   font-weight: 600;
-  color: var(--color-ink-primary);
+  color: var(--color-text-primary);
 }
 
 .legal h3 {
@@ -144,14 +301,14 @@ body {
   font-family: var(--font-display), sans-serif;
   font-size: 1rem;
   font-weight: 600;
-  color: var(--color-ink-primary);
+  color: var(--color-text-primary);
 }
 
 .legal p,
 .legal li {
   font-size: 0.95rem;
   line-height: 1.7;
-  color: var(--color-ink-secondary);
+  color: var(--color-text-secondary);
 }
 
 .legal p {
@@ -169,17 +326,17 @@ body {
 }
 
 .legal a {
-  color: var(--color-accent-green);
+  color: var(--color-accent);
   text-decoration: underline;
   text-underline-offset: 2px;
 }
 
 .legal a:hover {
-  color: var(--color-accent-green-hover);
+  color: var(--color-accent-hover);
 }
 
 .legal strong {
-  color: var(--color-ink-primary);
+  color: var(--color-text-primary);
   font-weight: 600;
 }
 

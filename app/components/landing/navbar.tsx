@@ -2,9 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { LogoIcon, MenuIcon, CloseIcon } from "./icons";
+import { LOGIN_URL, SIGNUP_URL } from "../../lib/site";
 
 const LINKS = [
-  { label: "Templates", href: "#features" },
+  { label: "Features", href: "#features" },
   { label: "Pricing", href: "#pricing" },
   { label: "FAQ", href: "#faq" },
 ];
@@ -22,40 +23,46 @@ export function Navbar() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 border-b transition-colors duration-300 ${
-        scrolled
-          ? "border-line-default bg-surface-1/90 backdrop-blur-xl"
-          : "border-line-subtle bg-surface-0/60 backdrop-blur-xl"
+      className={`fixed inset-x-0 top-0 z-50 border-b border-border-subtle backdrop-blur-xl transition-colors duration-300 ease-standard ${
+        scrolled ? "bg-surface-1/90" : "bg-surface-0/80"
       }`}
     >
-      <nav className="mx-auto flex h-14 max-w-6xl items-center justify-between px-6">
-        <a href="#top" className="flex items-center gap-2">
+      <nav className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-6 px-6">
+        <a href="#top" className="flex items-center gap-2.5 text-text-primary">
           <LogoIcon />
-          <span className="font-display text-base font-semibold text-ink-primary">
+          <span className="text-[15px] font-semibold tracking-[-0.01em]">
             Modo
           </span>
         </a>
 
-        <div className="hidden items-center gap-8 md:flex">
+        <div className="hidden items-center gap-7 md:flex">
           {LINKS.map((link) => (
             <a
               key={link.label}
               href={link.href}
-              className="font-body text-sm font-medium text-ink-secondary transition-colors hover:text-ink-primary"
+              className="text-sm text-text-secondary transition-colors duration-150 ease-standard hover:text-text-primary"
             >
               {link.label}
             </a>
           ))}
         </div>
 
-        <div className="hidden items-center gap-2 md:flex">
+        <div className="hidden items-center gap-2.5 md:flex">
           <a
-            href="https://app.getmodo.pro"
+            href={LOGIN_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-lg bg-accent-green px-4 py-2 font-display text-sm font-semibold text-surface-0 transition-all duration-200 hover:bg-accent-green-hover hover:shadow-[0_0_24px_rgba(52,211,153,0.25)]"
+            className="rounded-md border border-border-default bg-surface-2 px-4 py-1.5 text-sm text-text-primary transition-colors duration-150 ease-standard hover:border-border-strong hover:bg-surface-4"
           >
-            Start for free
+            Sign in
+          </a>
+          <a
+            href={SIGNUP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-md bg-accent px-4 py-2 text-sm font-medium text-accent-fg transition-colors duration-150 ease-standard hover:bg-accent-hover"
+          >
+            Start free
           </a>
         </div>
 
@@ -64,9 +71,9 @@ export function Navbar() {
           aria-label="Open menu"
           aria-expanded={open}
           onClick={() => setOpen(true)}
-          className="text-ink-primary md:hidden"
+          className="text-text-primary md:hidden"
         >
-          <MenuIcon />
+          <MenuIcon width={22} height={22} />
         </button>
       </nav>
 
@@ -76,28 +83,28 @@ export function Navbar() {
         aria-hidden={!open}
       >
         <div
-          className={`absolute inset-0 bg-black/60 transition-opacity duration-300 ${
+          className={`absolute inset-0 bg-black/40 transition-opacity duration-300 ${
             open ? "opacity-100" : "opacity-0"
           }`}
           onClick={() => setOpen(false)}
         />
         <aside
-          className={`absolute right-0 top-0 flex h-full w-72 max-w-[80%] flex-col gap-2 border-l border-line-default bg-surface-1 p-6 shadow-2xl transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+          className={`absolute right-0 top-0 flex h-full w-72 max-w-[80%] flex-col gap-1 border-l border-border-default bg-surface-1 p-6 shadow-pop transition-transform duration-300 ease-standard ${
             open ? "translate-x-0" : "translate-x-full"
           }`}
         >
           <div className="mb-6 flex items-center justify-between">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2.5">
               <LogoIcon />
-              <span className="font-display text-base font-semibold">Modo</span>
+              <span className="text-[15px] font-semibold">Modo</span>
             </div>
             <button
               type="button"
               aria-label="Close menu"
               onClick={() => setOpen(false)}
-              className="text-ink-secondary hover:text-ink-primary"
+              className="text-text-secondary hover:text-text-primary"
             >
-              <CloseIcon />
+              <CloseIcon width={22} height={22} />
             </button>
           </div>
 
@@ -106,7 +113,7 @@ export function Navbar() {
               key={link.label}
               href={link.href}
               onClick={() => setOpen(false)}
-              className="rounded-lg px-3 py-3 font-body text-base font-medium text-ink-secondary transition-colors hover:bg-surface-2 hover:text-ink-primary"
+              className="rounded-md px-3 py-3 text-base text-text-secondary transition-colors duration-150 ease-standard hover:bg-surface-4 hover:text-text-primary"
             >
               {link.label}
             </a>
@@ -114,12 +121,20 @@ export function Navbar() {
 
           <div className="mt-auto flex flex-col gap-3 pt-6">
             <a
-              href="https://app.getmodo.pro"
+              href={LOGIN_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-lg bg-accent-green px-5 py-3 text-center font-display text-sm font-semibold text-surface-0"
+              className="rounded-md border border-border-default bg-surface-2 px-5 py-2.5 text-center text-[15px] text-text-primary"
             >
-              Start for free
+              Sign in
+            </a>
+            <a
+              href={SIGNUP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-md bg-accent px-5 py-2.5 text-center text-[15px] font-medium text-accent-fg"
+            >
+              Start free
             </a>
           </div>
         </aside>
