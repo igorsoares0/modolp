@@ -14,3 +14,15 @@ export const LOGIN_URL = `${APP_URL}/login`;
  */
 export const PRO_PRICE = "$10";
 export const PRO_PRICE_PERIOD = "/month";
+
+/**
+ * Deep link from a content page into the editor with the canvas preselected.
+ *
+ * The editor has to (a) read `format` and (b) carry it through signup and email
+ * verification for this to land the visitor on the right canvas. Until it does,
+ * the param is ignored and this degrades to a normal signup link — so it is safe
+ * to ship first, but it is dead weight until the editor honours it.
+ */
+export function signupUrlForFormat(formatSlug: string): string {
+  return `${SIGNUP_URL}?format=${encodeURIComponent(formatSlug)}`;
+}

@@ -26,8 +26,16 @@ import {
   SIGNUP_URL,
 } from "./lib/site";
 
+type Feature = {
+  icon: (props: React.SVGProps<SVGSVGElement>) => React.ReactElement;
+  title: string;
+  body: string;
+  /** Optional contextual link out to a reference page. */
+  link?: { href: string; label: string };
+};
+
 /** AI leads the grid — it's the reason the product changed. */
-const FEATURES = [
+const FEATURES: Feature[] = [
   {
     icon: SparkleIcon,
     title: "Write a line. Get a design.",
@@ -42,6 +50,9 @@ const FEATURES = [
     icon: FormatIcon,
     title: "Every format, pixel-perfect.",
     body: "Instagram Posts (1080×1080), Instagram Stories (1080×1920), Pinterest (1000×1500) — pre-sized and ready. No manual math, no cropping surprises.",
+    // Contextual link into the /sizes family — worth more for crawl than the
+    // footer link, since this is the page with the most authority.
+    link: { href: "/sizes", label: "See every size →" },
   },
   {
     icon: TextIcon,
@@ -276,12 +287,22 @@ export default function Home() {
               three times a day, the marketer who needed it an hour ago. No
               learning curve, no bloat — just the tools people actually use.
             </p>
-            <a
-              href="#features"
-              className="mt-[22px] inline-block text-sm text-accent transition-colors duration-150 ease-standard hover:text-accent-hover"
-            >
-              See all features →
-            </a>
+            <div className="mt-[22px] flex flex-wrap items-center gap-x-6 gap-y-2">
+              <a
+                href="#features"
+                className="inline-block text-sm text-accent transition-colors duration-150 ease-standard hover:text-accent-hover"
+              >
+                See all features →
+              </a>
+              {/* The comparison page's natural anchor — this section is the
+                  positioning it expands on. */}
+              <Link
+                href="/vs/canva"
+                className="inline-block text-sm text-accent transition-colors duration-150 ease-standard hover:text-accent-hover"
+              >
+                Modo vs Canva →
+              </Link>
+            </div>
           </div>
 
           <div className="flex flex-col gap-3">
@@ -384,7 +405,7 @@ export default function Home() {
           </Reveal>
 
           <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {FEATURES.map(({ icon: Icon, title, body }, i) => (
+            {FEATURES.map(({ icon: Icon, title, body, link }, i) => (
               <Reveal
                 key={title}
                 as="article"
@@ -396,6 +417,14 @@ export default function Home() {
                 <p className="mt-2 text-[13.5px] leading-[1.6] text-text-secondary [text-wrap:pretty]">
                   {body}
                 </p>
+                {link && (
+                  <Link
+                    href={link.href}
+                    className="mt-3 inline-block text-[13px] font-medium text-accent transition-colors duration-150 ease-standard hover:text-accent-hover"
+                  >
+                    {link.label}
+                  </Link>
+                )}
               </Reveal>
             ))}
           </div>
@@ -610,6 +639,12 @@ export default function Home() {
             >
               Sign in
             </a>
+            <Link href="/sizes" className={footerLink}>
+              Sizes
+            </Link>
+            <Link href="/vs/canva" className={footerLink}>
+              vs Canva
+            </Link>
             <Link href="/terms" className={footerLink}>
               Terms
             </Link>

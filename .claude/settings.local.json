@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "WebSearch",
-      "WebFetch(domain:www.paddle.com)"
+      "WebFetch(domain:www.paddle.com)",
+      "Bash(npm run *)"
     ]
   }
 }
