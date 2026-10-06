@@ -107,7 +107,7 @@ export default async function FormatSizePage({ params }: Props) {
         <PrimaryButton href={signupUrlForFormat(format.slug)} target="_blank">
           Open a {format.width} × {format.height} canvas
         </PrimaryButton>
-        <span className="text-[13px] text-text-ghost">
+        <span className="text-[13px] text-text-tertiary">
           Free plan, no watermark on export.
         </span>
       </div>

@@ -56,15 +56,49 @@ app/
   opengraph-image.tsx          1200×630 social card, generated at build
   robots.ts · sitemap.ts
   lib/site.ts                  canonical origin, app URLs, Pro price
+  lib/content/                 the SEO content families (see below)
+    types.ts · formats.ts · comparisons.ts
   components/landing/
     navbar.tsx                 fixed nav + mobile drawer
     editor-mock.tsx            hand-built replica of the editor (hero visual)
     prompt-demo.tsx            the typing AI-bar stand-in
     faq.tsx · reveal.tsx · primitives.tsx · icons.tsx
   components/legal/legal-page.tsx    shared chrome for the three legal pages
+  components/content/content-page.tsx  shared chrome for the SEO pages
+  sizes/ · sizes/[slug]/       canvas-size reference pages
+  vs/[slug]/                   competitor comparison pages
   terms/ · privacy/ · refund/
 designdocs/                    copy, page spec, design tokens, design comps
+  editor-integration.md        what the landing needs from the editor repo
 ```
+
+## SEO content
+
+Beyond the landing there are two content families, both statically prerendered
+from typed modules in `app/lib/content/`:
+
+- **`/sizes`** — canvas-size reference (`/sizes/instagram-post`, etc.)
+- **`/vs/[slug]`** — competitor comparisons (`/vs/canva`)
+
+Three rules hold across both:
+
+**1. The content module is the source of truth.** `generateStaticParams`, the
+sitemap and the cross-links all read from it, so a new entry cannot be added to
+the site and forgotten in the sitemap. Routes use `dynamicParams = false`, so an
+unknown slug is a 404 rather than a runtime-rendered page.
+
+**2. Only claim what the editor can serve.** `formats.ts` covers exactly the three
+canvases Modo ships presets for. A LinkedIn-banner page would rank for a query
+that ends at an editor with no such canvas — the same discipline as the copy
+appendix in `landing-copy.md`.
+
+**3. Facts about other companies get checked, and the check gets dated.**
+`comparisons.ts` carries `rivalFactsCheckedOn`, which drives the page's sitemap
+`lastmod`. The rival column deliberately avoids prices and counts that churn.
+
+The CTAs on `/sizes/*` deep-link into the editor with `?format=<slug>`. That is
+inert until the editor honours it — see `designdocs/editor-integration.md`, which
+specifies that and the template-preview manifest the next content family needs.
 
 ## Design system
 

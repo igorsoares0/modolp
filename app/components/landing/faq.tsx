@@ -1,7 +1,6 @@
 "use client";
 
 import { useId, useState } from "react";
-import { PlusIcon } from "./icons";
 
 const ITEMS = [
   {
@@ -10,7 +9,7 @@ const ITEMS = [
   },
   {
     q: "Is the free plan a trial?",
-    a: "No. It's free forever — unlimited projects, watermark-free exports, and 5 AI generations every month. You only upgrade if you need more AI or more storage.",
+    a: "No. It's free forever — unlimited projects, watermark-free exports, and 5 AI briefs every month. You only upgrade if you need more AI or more storage.",
   },
   {
     q: "What exactly does the AI do?",
@@ -51,14 +50,14 @@ export function Faq() {
   const baseId = useId();
 
   return (
-    <div>
+    <div className="border-b border-border-default">
       {ITEMS.map((item, i) => {
         const isOpen = openIndex === i;
         const panelId = `${baseId}-panel-${i}`;
         const buttonId = `${baseId}-button-${i}`;
 
         return (
-          <div key={item.q} className="border-b border-border-subtle">
+          <div key={item.q} className="border-t border-border-default">
             <button
               type="button"
               id={buttonId}
@@ -67,27 +66,25 @@ export function Faq() {
               aria-controls={panelId}
               className="flex w-full items-center justify-between gap-4 py-5 text-left"
             >
-              <span className="text-[15px] font-medium text-text-primary">
+              <span className="text-[16px] font-bold text-text-primary">
                 {item.q}
               </span>
-              <PlusIcon
+              <span
                 aria-hidden="true"
-                className={`shrink-0 text-text-ghost transition-transform duration-300 ease-standard ${
-                  isOpen ? "rotate-45" : ""
-                }`}
-                width={18}
-                height={18}
-              />
+                className="w-4 shrink-0 text-center font-mono text-[16px] text-text-tertiary"
+              >
+                {isOpen ? "−" : "+"}
+              </span>
             </button>
             <div
               id={panelId}
               role="region"
               aria-labelledby={buttonId}
-              className="grid overflow-hidden transition-all duration-300 ease-standard"
+              className="grid overflow-hidden transition-[grid-template-rows] duration-150 ease-standard"
               style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }}
             >
               <div className="min-h-0">
-                <p className="max-w-[40rem] pb-5 pr-8 text-[13.5px] leading-[1.65] text-text-secondary [text-wrap:pretty]">
+                <p className="max-w-[40rem] pb-5 pr-8 text-[15px] leading-[1.6] text-text-secondary [text-wrap:pretty]">
                   {item.a}
                 </p>
               </div>

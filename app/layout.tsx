@@ -1,40 +1,35 @@
 import type { Metadata, Viewport } from "next";
-import { Instrument_Sans, Geist_Mono, Playfair_Display } from "next/font/google";
+import { Archivo, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import { SITE_URL } from "./lib/site";
 
-// Chrome: one sans for display, body and UI. Weight tops out at 600.
-const instrumentSans = Instrument_Sans({
-  variable: "--font-instrument-sans",
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
+// The app's two typefaces (dsgntool app/layout.tsx). No `weight`, so next/font
+// emits the variable font; the `wdth` axis is what .font-wide / .type-display-*
+// (font-stretch 112–125%) lean on.
+const archivo = Archivo({
+  variable: "--font-archivo",
+  subsets: ["latin", "latin-ext"],
+  axes: ["wdth"],
   display: "swap",
 });
 
-// Numeric: always paired with tabular-nums. 600 is here for the pricing
-// figures — without it the browser fakes the weight and the digits smear.
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+// Kickers, prices, captions — always with tabular-nums on numbers.
+const plexMono = IBM_Plex_Mono({
+  variable: "--font-plex-mono",
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "500"],
   display: "swap",
 });
 
-// Document font, not a UI font — it only renders inside the editor mock's
-// artwork, where a serif is what makes the design read as a real design.
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
-  subsets: ["latin"],
-  weight: ["400"],
-  style: ["normal", "italic"],
-  display: "swap",
-});
+const DESCRIPTION =
+  "Start from a template or a one-line brief, then adjust type, color and layout like a designer would. Instagram and Pinterest posts, free plan, no watermark.";
+const OG_DESCRIPTION =
+  "Modo is a fast design editor for social posts — 52 templates, AI briefs and watermark-free export, in your browser.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Modo — AI Design Editor for Social Media, in Your Browser",
-  description:
-    "Describe your post and Modo designs it — templates, copy, palette and type. Instagram, Stories and Pinterest graphics in minutes. Free plan, no watermark.",
+  title: "Modo — Social post design editor, in your browser",
+  description: DESCRIPTION,
   alternates: {
     canonical: "/",
   },
@@ -42,22 +37,22 @@ export const metadata: Metadata = {
     type: "website",
     siteName: "Modo",
     url: "/",
-    title: "Describe the post. Get the design.",
-    description:
-      "Modo is the fast, AI-powered design editor for social media. Templates, assets, layers and watermark-free export — all in your browser.",
+    title: "Posts that look made, not generated.",
+    description: OG_DESCRIPTION,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Describe the post. Get the design.",
-    description:
-      "Modo is the fast, AI-powered design editor for social media. Templates, assets, layers and watermark-free export — all in your browser.",
+    title: "Posts that look made, not generated.",
+    description: OG_DESCRIPTION,
   },
 };
 
-// The landing is a light-first page and does not follow the OS scheme, so
-// there is one theme-color, not a pair. (surface-0, light.)
+// surface-0 in each scheme — the page follows the OS.
 export const viewport: Viewport = {
-  themeColor: "#eceae5",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f2efe8" },
+    { media: "(prefers-color-scheme: dark)", color: "#121211" },
+  ],
 };
 
 export default function RootLayout({
@@ -68,7 +63,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${instrumentSans.variable} ${geistMono.variable} ${playfair.variable} h-full antialiased`}
+      className={`${archivo.variable} ${plexMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col font-body">{children}</body>
     </html>

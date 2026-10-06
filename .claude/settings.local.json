@@ -3,7 +3,8 @@
     "allow": [
       "WebSearch",
       "WebFetch(domain:www.paddle.com)",
-      "Bash(npm run *)"
+      "Bash(npm run *)",
+      "WebFetch(domain:app.getmodo.pro)"
     ]
   }
 }

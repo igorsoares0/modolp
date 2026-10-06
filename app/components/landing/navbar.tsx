@@ -1,79 +1,70 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { LogoIcon, MenuIcon, CloseIcon } from "./icons";
+import { useState } from "react";
+import { MenuIcon, CloseIcon } from "./icons";
+import { Wordmark } from "./primitives";
 import { LOGIN_URL, SIGNUP_URL } from "../../lib/site";
 
 const LINKS = [
-  { label: "Features", href: "#features" },
+  { label: "Templates", href: "#templates" },
+  { label: "AI briefs", href: "#how-it-works" },
   { label: "Pricing", href: "#pricing" },
-  { label: "FAQ", href: "#faq" },
 ];
 
+/** Full-height cells split by hairlines — the app's topbar, not pill groups. */
+const cell = "flex items-center border-border-default";
+
 export function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-50 border-b border-border-subtle backdrop-blur-xl transition-colors duration-300 ease-standard ${
-        scrolled ? "bg-surface-1/90" : "bg-surface-0/80"
-      }`}
-    >
-      <nav className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-6 px-6">
-        <a href="#top" className="flex items-center gap-2.5 text-text-primary">
-          <LogoIcon />
-          <span className="text-[15px] font-semibold tracking-[-0.01em]">
-            Modo
-          </span>
+    <header className="sticky top-0 z-50 border-b border-border-default bg-surface-1">
+      <nav className="mx-auto flex h-14 max-w-[1440px] items-stretch whitespace-nowrap">
+        <a
+          href="#top"
+          className={`${cell} border-r px-5 text-[19px] text-text-primary sm:px-7`}
+        >
+          <Wordmark />
         </a>
 
-        <div className="hidden items-center gap-7 md:flex">
+        <div className="hidden items-stretch md:flex">
           {LINKS.map((link) => (
             <a
               key={link.label}
               href={link.href}
-              className="text-sm text-text-secondary transition-colors duration-150 ease-standard hover:text-text-primary"
+              className={`${cell} px-5 text-[14px] text-text-secondary transition-colors duration-150 ease-standard hover:text-text-primary`}
             >
               {link.label}
             </a>
           ))}
         </div>
 
-        <div className="hidden items-center gap-2.5 md:flex">
-          <a
-            href={LOGIN_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-md border border-border-default bg-surface-2 px-4 py-1.5 text-sm text-text-primary transition-colors duration-150 ease-standard hover:border-border-strong hover:bg-surface-4"
-          >
-            Sign in
-          </a>
-          <a
-            href={SIGNUP_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-md bg-accent px-4 py-2 text-sm font-medium text-accent-fg transition-colors duration-150 ease-standard hover:bg-accent-hover"
-          >
-            Start free
-          </a>
-        </div>
+        <div className="flex-1" />
 
+        <a
+          href={LOGIN_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={`${cell} hidden border-l px-6 text-[14px] font-semibold text-text-primary transition-colors duration-150 ease-standard hover:bg-surface-3 md:flex`}
+        >
+          Log in
+        </a>
+        <a
+          href={SIGNUP_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={`${cell} bg-accent px-5 font-expanded text-[14px] font-extrabold uppercase tracking-[0.02em] text-accent-fg transition-colors duration-150 ease-standard hover:bg-accent-hover sm:px-7`}
+        >
+          Start free
+        </a>
         <button
           type="button"
           aria-label="Open menu"
           aria-expanded={open}
           onClick={() => setOpen(true)}
-          className="text-text-primary md:hidden"
+          className={`${cell} justify-center border-l px-4 text-text-primary md:hidden`}
         >
-          <MenuIcon width={22} height={22} />
+          <MenuIcon width={20} height={20} />
         </button>
       </nav>
 
@@ -89,22 +80,21 @@ export function Navbar() {
           onClick={() => setOpen(false)}
         />
         <aside
-          className={`absolute right-0 top-0 flex h-full w-72 max-w-[80%] flex-col gap-1 border-l border-border-default bg-surface-1 p-6 shadow-pop transition-transform duration-300 ease-standard ${
-            open ? "translate-x-0" : "translate-x-full"
+          className={`absolute right-2 top-2 flex w-72 max-w-[85%] flex-col rounded-float border border-border-default bg-surface-1 shadow-pop transition-[opacity,transform] duration-200 ease-standard ${
+            open ? "translate-y-0 opacity-100" : "-translate-y-2 opacity-0"
           }`}
         >
-          <div className="mb-6 flex items-center justify-between">
-            <div className="flex items-center gap-2.5">
-              <LogoIcon />
-              <span className="text-[15px] font-semibold">Modo</span>
-            </div>
+          <div className="flex h-14 items-center justify-between border-b border-border-default pl-5">
+            <span className="text-[19px]">
+              <Wordmark />
+            </span>
             <button
               type="button"
               aria-label="Close menu"
               onClick={() => setOpen(false)}
-              className="text-text-secondary hover:text-text-primary"
+              className="flex h-14 w-14 items-center justify-center text-text-secondary hover:text-text-primary"
             >
-              <CloseIcon width={22} height={22} />
+              <CloseIcon width={20} height={20} />
             </button>
           </div>
 
@@ -113,30 +103,20 @@ export function Navbar() {
               key={link.label}
               href={link.href}
               onClick={() => setOpen(false)}
-              className="rounded-md px-3 py-3 text-base text-text-secondary transition-colors duration-150 ease-standard hover:bg-surface-4 hover:text-text-primary"
+              className="border-b border-border-default px-5 py-4 text-[15px] text-text-secondary transition-colors duration-150 ease-standard hover:bg-surface-3 hover:text-text-primary"
             >
               {link.label}
             </a>
           ))}
 
-          <div className="mt-auto flex flex-col gap-3 pt-6">
-            <a
-              href={LOGIN_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-md border border-border-default bg-surface-2 px-5 py-2.5 text-center text-[15px] text-text-primary"
-            >
-              Sign in
-            </a>
-            <a
-              href={SIGNUP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-md bg-accent px-5 py-2.5 text-center text-[15px] font-medium text-accent-fg"
-            >
-              Start free
-            </a>
-          </div>
+          <a
+            href={LOGIN_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-5 py-4 text-[15px] font-semibold text-text-primary hover:bg-surface-3"
+          >
+            Log in
+          </a>
         </aside>
       </div>
     </header>

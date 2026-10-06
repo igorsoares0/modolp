@@ -36,8 +36,8 @@ export default function SizesHubPage() {
       <p className="mt-5 text-[17px] leading-[1.6] text-text-secondary [text-wrap:pretty]">
         Three formats cover almost everything people post: the square Instagram
         post, the full-screen Story and the vertical Pinterest pin. Below is the
-        exact spec for each, what the platform does to your image once you upload
-        it, and a canvas already set to the right size.
+        exact spec for each, what the platform does to your image once you
+        upload it, and a canvas already set to the right size.
       </p>
 
       <div className="mt-10 overflow-x-auto">
@@ -64,7 +64,7 @@ export default function SizesHubPage() {
                 <td className="px-5 py-3.5">
                   <Link
                     href={`/sizes/${format.slug}`}
-                    className="text-[14.5px] font-medium text-accent underline underline-offset-2 hover:text-accent-hover"
+                    className="text-[14.5px] font-semibold text-text-primary underline decoration-border-default underline-offset-[3px] transition-colors duration-150 ease-standard hover:decoration-text-primary"
                   >
                     {format.name}
                   </Link>

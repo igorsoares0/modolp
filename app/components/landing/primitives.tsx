@@ -1,10 +1,10 @@
 import type { ReactNode } from "react";
 
 /**
- * Tinted pill used for both section eyebrows and the "Most popular" flag.
- * 11px / 500 / uppercase / 0.1em — the only label style in the system.
+ * Mono kicker that opens the hero and every section ("PRICING").
+ * Plex Mono 500 12px, uppercase, 0.06em — the only label style on the page.
  */
-export function Badge({
+export function Kicker({
   children,
   className = "",
 }: {
@@ -13,15 +13,24 @@ export function Badge({
 }) {
   return (
     <span
-      className={`inline-flex items-center rounded-full bg-accent-tint px-2.5 py-1 text-[11px] font-medium uppercase tracking-[0.1em] text-accent-tint-fg ${className}`}
+      className={`block font-mono text-[12px] font-medium uppercase tracking-[0.06em] text-text-tertiary ${className}`}
     >
       {children}
     </span>
   );
 }
 
-/** Alias kept for readability at section heads — same visual as Badge. */
-export const Eyebrow = Badge;
+/** Alias kept for the content pages (/sizes, /vs) — same visual as Kicker. */
+export const Eyebrow = Kicker;
+
+/** The "modo." wordmark. The full stop is the only accent in it. */
+export function Wordmark({ className = "" }: { className?: string }) {
+  return (
+    <span className={`font-black tracking-[-0.02em] font-wide ${className}`}>
+      modo<span className="text-accent">.</span>
+    </span>
+  );
+}
 
 type ButtonProps = {
   href?: string;
@@ -37,6 +46,14 @@ function externalProps(target?: string) {
     : { target };
 }
 
+/** Riso-red CTA. Ink text on the red, never white (same as the app). */
+export const primaryButton =
+  "inline-flex items-center justify-center whitespace-nowrap bg-accent px-[18px] py-[11px] font-expanded text-[14px] font-extrabold uppercase tracking-[0.02em] text-accent-fg transition-colors duration-150 ease-standard hover:bg-accent-hover active:shadow-[inset_0_2px_0_rgb(0_0_0/0.25)]";
+
+/** Ink-outlined CTA. Hover lifts to surface-3, pressed fills with ink. */
+export const secondaryButton =
+  "inline-flex items-center justify-center whitespace-nowrap border border-border-strong px-[18px] py-[10px] text-[14px] font-bold text-text-primary transition-colors duration-150 ease-standard hover:bg-surface-3 active:bg-surface-inverse active:text-text-inverse";
+
 export function PrimaryButton({
   href = "#",
   children,
@@ -47,14 +64,14 @@ export function PrimaryButton({
     <a
       href={href}
       {...externalProps(target)}
-      className={`inline-flex items-center justify-center rounded-md bg-accent px-5 py-2.5 text-[15px] font-medium text-accent-fg transition-colors duration-150 ease-standard hover:bg-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface-0 ${className}`}
+      className={`${primaryButton} ${className}`}
     >
       {children}
     </a>
   );
 }
 
-export function GhostButton({
+export function SecondaryButton({
   href = "#",
   children,
   className = "",
@@ -64,7 +81,7 @@ export function GhostButton({
     <a
       href={href}
       {...externalProps(target)}
-      className={`inline-flex items-center justify-center rounded-md border border-border-default bg-surface-2 px-5 py-2.5 text-[15px] text-text-primary transition-colors duration-150 ease-standard hover:border-border-strong hover:bg-surface-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface-0 ${className}`}
+      className={`${secondaryButton} ${className}`}
     >
       {children}
     </a>

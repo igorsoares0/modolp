@@ -82,7 +82,7 @@ export default async function ComparisonPage({ params }: Props) {
                 <th className="w-[22%] px-5 py-3 text-[12px] uppercase tracking-[0.06em] text-text-tertiary">
                   &nbsp;
                 </th>
-                <th className="px-5 py-3 text-[12px] uppercase tracking-[0.06em] text-accent">
+                <th className="px-5 py-3 text-[12px] font-bold uppercase tracking-[0.06em] text-text-primary">
                   Modo
                 </th>
                 <th className="px-5 py-3 text-[12px] uppercase tracking-[0.06em] text-text-tertiary">
@@ -140,7 +140,7 @@ export default async function ComparisonPage({ params }: Props) {
         <FaqList items={comparison.faq} />
       </Section>
 
-      <p className="mt-12 border-t border-border-subtle pt-6 text-[12.5px] leading-[1.6] text-text-ghost">
+      <p className="mt-12 border-t border-border-subtle pt-6 text-[12.5px] leading-[1.6] text-text-tertiary">
         {comparison.trademarkNote}
       </p>
     </ContentPage>

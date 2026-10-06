@@ -1,7 +1,6 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
-import { LogoIcon } from "../landing/icons";
-import { PrimaryButton } from "../landing/primitives";
+import { Wordmark } from "../landing/primitives";
 import { LOGIN_URL, SIGNUP_URL } from "../../lib/site";
 
 /**
@@ -14,7 +13,7 @@ import { LOGIN_URL, SIGNUP_URL } from "../../lib/site";
  */
 
 const footerLink =
-  "text-[13.5px] text-text-ghost transition-colors duration-150 ease-standard hover:text-text-secondary";
+  "text-[13.5px] text-text-secondary transition-colors duration-150 ease-standard hover:text-text-primary";
 
 export type Breadcrumb = {
   label: string;
@@ -30,38 +29,38 @@ export function ContentPage({
 }) {
   return (
     <div className="flex min-h-screen flex-col">
-      <header className="sticky top-0 z-40 border-b border-border-subtle bg-surface-0/80 backdrop-blur-xl">
-        <nav className="mx-auto flex h-14 max-w-5xl items-center justify-between px-6">
-          <Link href="/" className="flex items-center gap-2.5">
-            <LogoIcon width={22} height={22} />
-            <span className="font-display text-[15px] font-semibold text-text-primary">
-              Modo
-            </span>
+      <header className="sticky top-0 z-40 border-b border-border-default bg-surface-1">
+        <nav className="flex h-14 items-stretch whitespace-nowrap">
+          <Link
+            href="/"
+            className="flex items-center border-r border-border-default px-5 text-[19px] text-text-primary sm:px-7"
+          >
+            <Wordmark />
           </Link>
-          <div className="flex items-center gap-5">
-            <a
-              href={LOGIN_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden font-body text-sm text-text-secondary transition-colors duration-150 ease-standard hover:text-text-primary sm:inline"
-            >
-              Sign in
-            </a>
-            <PrimaryButton
-              href={SIGNUP_URL}
-              target="_blank"
-              className="px-4 py-2 text-sm"
-            >
-              Start free
-            </PrimaryButton>
-          </div>
+          <div className="flex-1" />
+          <a
+            href={LOGIN_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden items-center border-l border-border-default px-6 text-[14px] font-semibold text-text-primary transition-colors duration-150 ease-standard hover:bg-surface-3 sm:flex"
+          >
+            Log in
+          </a>
+          <a
+            href={SIGNUP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center bg-accent px-5 font-expanded text-[14px] font-extrabold uppercase tracking-[0.02em] text-accent-fg transition-colors duration-150 ease-standard hover:bg-accent-hover sm:px-7"
+          >
+            Start free
+          </a>
         </nav>
       </header>
 
       <main className="mx-auto w-full max-w-3xl flex-1 px-6 py-14">
         {breadcrumbs && breadcrumbs.length > 0 && (
           <nav aria-label="Breadcrumb" className="mb-8">
-            <ol className="flex flex-wrap items-center gap-2 text-[13px] text-text-ghost">
+            <ol className="flex flex-wrap items-center gap-2 text-[13px] text-text-tertiary">
               {breadcrumbs.map((crumb, i) => (
                 <li key={crumb.href} className="flex items-center gap-2">
                   {i > 0 && <span aria-hidden="true">/</span>}
@@ -79,15 +78,17 @@ export function ContentPage({
         {children}
       </main>
 
-      <footer className="border-t border-border-subtle bg-surface-1 px-6 py-10">
-        <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-6">
-          <div className="flex items-center gap-2.5">
-            <LogoIcon width={22} height={22} />
-            <span className="text-[13.5px] text-text-ghost">
-              © {new Date().getFullYear()} Modo. All rights reserved.
+      <footer className="border-t border-border-default bg-surface-1 px-6 py-10">
+        <div className="mx-auto flex max-w-5xl flex-wrap items-baseline justify-between gap-6">
+          <div className="flex items-baseline gap-4">
+            <span className="text-[22px]">
+              <Wordmark />
+            </span>
+            <span className="font-mono text-[12px] text-text-tertiary">
+              © {new Date().getFullYear()}
             </span>
           </div>
-          <div className="flex flex-wrap gap-6">
+          <div className="flex flex-wrap gap-x-7 gap-y-3">
             <Link href="/sizes" className={footerLink}>
               Sizes
             </Link>
@@ -219,7 +220,7 @@ export function RatioPreview({
     >
       <div
         aria-hidden="true"
-        className="flex max-h-44 items-center justify-center rounded-md border border-border-strong bg-surface-2 shadow-raise"
+        className="flex max-h-44 items-center justify-center border border-border-strong bg-surface-2"
         style={{ aspectRatio: `${width} / ${height}`, height: "11rem" }}
       >
         <span className="px-2 text-center font-mono text-[11px] tabular-nums text-text-tertiary">

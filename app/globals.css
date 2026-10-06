@@ -1,104 +1,97 @@
 @import "tailwindcss";
 
 /* ─────────────────────────────────────────────────────────────────────
-   Raw token values — Daylight/Íris. Light IS the theme; dark is opt-in.
+   Raw token values — "H / Final", copied from the app's app/globals.css
+   (dsgntool). When a token changes there, it changes here too.
 
-   Dark applies only under `.dark` on the root element, exactly as in
-   designdocs/design-tokens.md §Snippet. It is deliberately NOT wired to
-   `prefers-color-scheme`: the landing is a light-first page and must not
-   flip to dark just because the visitor's OS is.
+   The landing follows the visitor's OS scheme (light first, dark under
+   prefers-color-scheme). There is no toggle and no `.dark` class.
 
    These literals live HERE and nowhere else. `@theme inline` below only
    *aliases* them for Tailwind. Declaring a literal inside `@theme inline`
-   makes Tailwind inline it at build time, and the `.dark` block never
+   makes Tailwind inline it at build time, and the dark block never
    reaches it — the theme breaks silently.
    ───────────────────────────────────────────────────────────────────── */
 :root {
-  color-scheme: light;
+  color-scheme: light dark;
 
-  /* Surfaces — elevation is a step of luminance, never a shadow.
-     In light, surface-3 is *darker* than surface-2 on purpose: an input
-     sinks into a white card. */
-  --surface-0: #eceae5;
-  --surface-1: #f7f6f3;
-  --surface-2: #ffffff;
-  --surface-3: #f4f2ee;
-  --surface-4: #eeece7;
+  /* Surfaces — warm paper. */
+  --surface-0: #f2efe8;
+  --surface-1: #faf8f3;
+  --surface-2: #fffdf8;
+  --surface-3: #efebe2;
+  --surface-4: #e7e2d7;
+  --surface-inverse: #161513;
+  --text-inverse: #f2efe8;
 
-  /* Borders — black alphas in light, white alphas in dark */
-  --border-subtle: rgb(0 0 0 / 0.06);
-  --border-default: rgb(0 0 0 / 0.08);
-  --border-strong: rgb(0 0 0 / 0.14);
+  /* Rules. --border-strong is solid ink. */
+  --border-subtle: rgb(22 21 19 / 0.08);
+  --border-default: rgb(22 21 19 / 0.13);
+  --border-strong: #161513;
 
-  /* Text — four steps, and most copy is NOT primary.
-     Neither pure black nor pure white; both are deliberate. */
-  --text-primary: #1b1a18;
-  --text-secondary: #6b6862;
-  --text-tertiary: #8b877f;
-  --text-ghost: #a5a09a;
+  --text-primary: #161513;
+  --text-secondary: #5e5a52;
+  --text-tertiary: #6f6a61;
+  --text-ghost: #8c877d; /* placeholders only */
 
-  /* Accent — iris. The only accent with meaning: primary action, focus,
-     emphasis. It loses that job the moment two unrelated things are iris. */
-  --accent: #5b5bd6;
-  --accent-hover: #4a4ac4;
-  --accent-fg: #ffffff; /* text ON accent — never surface-0 */
-  --accent-tint: #f0ecff;
-  --accent-tint-fg: #4a45b8;
+  /* Accent — riso red. Primary CTAs, the wordmark's ".", step codes. */
+  --accent: #ff4a1c;
+  --accent-hover: #e8390d;
+  --accent-fg: #161513;
 
-  /* Categorical, not state. Success is NOT the accent — "saved" is
-     information, not an action. Only the editor mock uses these. */
-  --danger: #c9553d;
-  --danger-tint: #fdf3f1;
-  --success: #5f8f6c;
-  --warning: #b8823a;
+  /* Selection / focus — cobalt. The dimension badge and every focus ring. */
+  --selection: #2f4bff;
 
-  /* Dot grid behind hero / final CTA */
-  --canvas-dot: rgb(0 0 0 / 0.055);
+  /* AI — butter. The BRIEF tag and the AI step only. */
+  --ai: oklch(0.87 0.13 92);
+  --ai-fg: #161513;
 
-  /* Anchored surfaces take a border and no shadow; only what really
-     floats takes a shadow. */
-  --sh-raise: 0 1px 3px rgb(0 0 0 / 0.06);
-  --sh-pop: 0 8px 24px rgb(0 0 0 / 0.16);
-  --sh-modal: 0 14px 40px rgb(0 0 0 / 0.16);
-  --sh-canvas:
-    0 18px 50px rgb(0 0 0 / 0.13), 0 2px 6px rgb(0 0 0 / 0.06);
+  /* Tool tiles — the step icons borrow the editor's tool colours. */
+  --tool-templates-bg: oklch(0.89 0.055 55);
+  --tool-uploads-bg: oklch(0.89 0.055 235);
+  --tool-fg: #161513;
+
+  --sh-pop: 0 10px 26px rgb(0 0 0 / 0.25);
+  /* Paper shadow under the collage posts (mock: 0 30px 60px -12px). */
+  --sh-paper: 0 30px 60px -12px rgb(60 40 10 / 0.35);
 }
 
-.dark {
-  color-scheme: dark;
+@media (prefers-color-scheme: dark) {
+  :root {
+    --surface-0: #121211;
+    --surface-1: #1a1a18;
+    --surface-2: #1f1f1d;
+    --surface-3: #242422;
+    --surface-4: #2c2c29;
+    --surface-inverse: #eeebe3;
+    --text-inverse: #121211;
 
-  --surface-0: #0e0e10;
-  --surface-1: #161619;
-  --surface-2: #1c1c20;
-  --surface-3: #141417;
-  --surface-4: #26262b;
+    --border-subtle: rgb(238 235 227 / 0.07);
+    --border-default: rgb(238 235 227 / 0.11);
+    --border-strong: #eeebe3;
 
-  --border-subtle: #ffffff0d;
-  --border-default: #ffffff12;
-  --border-strong: #ffffff24;
+    --text-primary: #eeebe3;
+    --text-secondary: #a9a498;
+    --text-tertiary: #928d83;
+    --text-ghost: #6f6b63;
 
-  --text-primary: #ededf0;
-  --text-secondary: #9a9aa3;
-  --text-tertiary: #7d7d86;
-  --text-ghost: #5c5c65;
+    --accent: #ff5a2e;
+    --accent-hover: #ff7650;
+    --accent-fg: #121211;
 
-  --accent: #8b8bf5;
-  --accent-hover: #a5a5f8;
-  --accent-fg: #12121a;
-  --accent-tint: #8b8bf51f;
-  --accent-tint-fg: #a5a5f8;
+    --selection: #7b8cff;
 
-  --danger: #e0836f;
-  --danger-tint: #c9553d1f;
-  --success: #8fbf9a;
-  --warning: #d9a75c;
+    --ai: oklch(0.82 0.13 92);
+    --ai-fg: #161513;
 
-  --canvas-dot: rgb(255 255 255 / 0.05);
+    /* Dark: tile goes neutral, colour moves to the icon (as in the app). */
+    --tool-templates-bg: #242422;
+    --tool-uploads-bg: #242422;
+    --tool-fg: oklch(0.8 0.1 55);
 
-  --sh-raise: 0 1px 3px rgb(0 0 0 / 0.4);
-  --sh-pop: 0 12px 30px rgb(0 0 0 / 0.6);
-  --sh-modal: 0 24px 60px rgb(0 0 0 / 0.55);
-  --sh-canvas: 0 24px 60px rgb(0 0 0 / 0.55);
+    --sh-pop: 0 12px 30px rgb(0 0 0 / 0.6);
+    --sh-paper: 0 30px 60px -12px rgb(0 0 0 / 0.6);
+  }
 }
 
 @theme inline {
@@ -107,6 +100,8 @@
   --color-surface-2: var(--surface-2);
   --color-surface-3: var(--surface-3);
   --color-surface-4: var(--surface-4);
+  --color-surface-inverse: var(--surface-inverse);
+  --color-text-inverse: var(--text-inverse);
 
   /* Utility names match the app: border-border-default, text-text-primary. */
   --color-border-subtle: var(--border-subtle);
@@ -121,84 +116,34 @@
   --color-accent: var(--accent);
   --color-accent-hover: var(--accent-hover);
   --color-accent-fg: var(--accent-fg);
-  --color-accent-tint: var(--accent-tint);
-  --color-accent-tint-fg: var(--accent-tint-fg);
 
-  --color-danger: var(--danger);
-  --color-danger-tint: var(--danger-tint);
-  --color-success: var(--success);
-  --color-warning: var(--warning);
+  --color-selection: var(--selection);
+  --color-ai: var(--ai);
+  --color-ai-fg: var(--ai-fg);
 
-  --shadow-raise: var(--sh-raise);
+  --color-tool-templates: var(--tool-templates-bg);
+  --color-tool-uploads: var(--tool-uploads-bg);
+  --color-tool-fg: var(--tool-fg);
+
   --shadow-pop: var(--sh-pop);
-  --shadow-modal: var(--sh-modal);
-  --shadow-canvas: var(--sh-canvas);
+  --shadow-paper: var(--sh-paper);
 
-  /* The system's radius scale — NOT Tailwind's defaults (2/6/8/12px).
-     Buttons and inputs md, cards lg, large surfaces xl. */
-  --radius-sm: 6px;
-  --radius-md: 8px;
-  --radius-lg: 11px;
-  --radius-xl: 14px;
+  /* Square, like the app. Exceptions: rounded-float (the mobile drawer)
+     and rounded-full (dots). */
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+  --radius-float: 4px;
 
-  /* Chrome fonts (wired in layout.tsx). Playfair is a *document* font —
-     it only ever renders inside the editor mock artwork, never in UI. */
-  --font-display: var(--font-instrument-sans);
-  --font-body: var(--font-instrument-sans);
-  --font-mono: var(--font-geist-mono);
-  --font-doc-serif: var(--font-playfair);
+  /* Archivo (variable, wdth 62–125) for everything; IBM Plex Mono for
+     kickers, prices, captions and meta. Wired in layout.tsx. */
+  --font-display: var(--font-archivo), system-ui, sans-serif;
+  --font-body: var(--font-archivo), system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
 
   /* One easing for everything */
   --ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
-
-  --animate-fade-in: fade-in 0.4s var(--ease-standard) both;
-  --animate-scale-in: scale-in 0.5s var(--ease-standard) both;
-  --animate-canvas-appear: canvas-appear 0.7s var(--ease-standard) both;
-  --animate-caret: caret 1s steps(1) infinite;
-
-  @keyframes fade-in {
-    from {
-      opacity: 0;
-      transform: translateY(4px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes scale-in {
-    from {
-      opacity: 0;
-      transform: scale(0.96);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
-
-  @keyframes canvas-appear {
-    from {
-      opacity: 0;
-      transform: scale(0.92);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
-
-  @keyframes caret {
-    0%,
-    49% {
-      opacity: 1;
-    }
-    50%,
-    100% {
-      opacity: 0;
-    }
-  }
 }
 
 html {
@@ -206,62 +151,95 @@ html {
 }
 
 body {
-  background: var(--color-surface-0);
-  color: var(--color-text-primary);
-  font-family: var(--font-body), system-ui, sans-serif;
+  background: var(--surface-0);
+  color: var(--text-primary);
+  font-family: var(--font-archivo), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
 ::selection {
-  background: color-mix(in srgb, var(--accent) 25%, transparent);
+  background: color-mix(in srgb, var(--selection) 18%, transparent);
 }
 
+:focus-visible {
+  outline: 2px solid var(--selection);
+  outline-offset: 2px;
+}
+
+/* Expanded cuts of Archivo — they only work because the font is loaded
+   with its wdth axis (no `weight` in next/font). */
+.font-expanded { font-stretch: 112%; }
+.font-wide { font-stretch: 125%; }
+
 /* ── Landing type scale ───────────────────────────────────────────────
-   The app's chrome scale tops out at 20px; a landing needs more headroom.
-   Same font, same logic — 600 is the ceiling, weight never goes to 700.
-   Prefixed `type-` so it can't collide with Tailwind's `text-*`. */
+   Read from the H mock at 1440px and clamped down for smaller screens.
+   Unlayered on purpose: these beat a stray `font-semibold` utility on the
+   same element (utilities live in a cascade layer). */
 .type-display-xl {
-  font-size: clamp(2.375rem, 6.4vw, 4.25rem); /* 38 → 68px */
-  line-height: 1.04;
-  letter-spacing: -0.035em;
+  font-size: clamp(3.25rem, 7.2vw, 6.5rem); /* 52 → 104px */
+  font-weight: 900;
+  font-stretch: 125%;
+  line-height: 0.86;
+  letter-spacing: -0.045em;
   text-wrap: balance;
 }
 
 .type-display-lg {
-  font-size: clamp(1.6875rem, 4vw, 2.75rem); /* 27 → 44px */
-  line-height: 1.1;
-  letter-spacing: -0.03em;
+  font-size: clamp(2.5rem, 3.9vw, 3.5rem); /* 40 → 56px */
+  font-weight: 900;
+  font-stretch: 125%;
+  line-height: 0.9;
+  letter-spacing: -0.035em;
   text-wrap: balance;
 }
 
 .type-display-md {
-  font-size: clamp(1.5rem, 2.4vw, 1.875rem); /* 24 → 30px */
-  line-height: 1.15;
-  letter-spacing: -0.02em;
+  font-size: clamp(1.625rem, 2.2vw, 1.875rem); /* 26 → 30px */
+  font-weight: 800;
+  font-stretch: 115%;
+  line-height: 1;
+  letter-spacing: -0.015em;
 }
 
-/* Background dot grid — hero texture + final CTA backdrop */
-.canvas-dots {
-  background-image: radial-gradient(
-    circle,
-    var(--canvas-dot) 1px,
-    transparent 1px
-  );
-  background-size: 24px 24px;
+/* Footer wordmark */
+.type-wordmark-xl {
+  font-size: clamp(4.5rem, 8.4vw, 7.5rem); /* 72 → 120px */
+  font-weight: 900;
+  font-stretch: 125%;
+  line-height: 0.75;
+  letter-spacing: -0.05em;
+}
+
+/* ── Collage ──────────────────────────────────────────────────────────
+   Each post settles into its own angle (--r) with an 80ms stagger. */
+@keyframes post-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px) rotate(calc(var(--r) - 3deg));
+  }
+  to {
+    opacity: 1;
+    transform: rotate(var(--r));
+  }
+}
+
+.collage-post {
+  transform: rotate(var(--r));
+  animation: post-in 0.7s var(--ease-standard) both;
 }
 
 /* Reveal-on-scroll: hidden until the IntersectionObserver adds .is-visible */
 .reveal {
   opacity: 0;
-  transform: translateY(16px);
+  transform: translateY(12px);
 }
 
 .reveal.is-visible {
   opacity: 1;
   transform: translateY(0);
   transition:
-    opacity 0.6s var(--ease-standard),
-    transform 0.6s var(--ease-standard);
+    opacity 0.5s var(--ease-standard),
+    transform 0.5s var(--ease-standard);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -289,26 +267,26 @@ body {
 .legal h2 {
   margin-top: 2.5rem;
   margin-bottom: 0.75rem;
-  font-family: var(--font-display), sans-serif;
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: var(--color-text-primary);
+  font-size: 1.375rem;
+  font-weight: 800;
+  font-stretch: 115%;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
 }
 
 .legal h3 {
   margin-top: 1.75rem;
   margin-bottom: 0.5rem;
-  font-family: var(--font-display), sans-serif;
   font-size: 1rem;
-  font-weight: 600;
-  color: var(--color-text-primary);
+  font-weight: 700;
+  color: var(--text-primary);
 }
 
 .legal p,
 .legal li {
   font-size: 0.95rem;
   line-height: 1.7;
-  color: var(--color-text-secondary);
+  color: var(--text-secondary);
 }
 
 .legal p {
@@ -325,26 +303,19 @@ body {
   padding-left: 0.25rem;
 }
 
+/* Links are ink with a hairline underline — red is for CTAs only. */
 .legal a {
-  color: var(--color-accent);
+  color: var(--text-primary);
   text-decoration: underline;
-  text-underline-offset: 2px;
+  text-decoration-color: var(--border-default);
+  text-underline-offset: 3px;
 }
 
 .legal a:hover {
-  color: var(--color-accent-hover);
+  text-decoration-color: var(--text-primary);
 }
 
 .legal strong {
-  color: var(--color-text-primary);
-  font-weight: 600;
-}
-
-/* Hide scrollbar on the horizontally-scrolling social proof bar (mobile) */
-.no-scrollbar {
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
+  color: var(--text-primary);
+  font-weight: 700;
 }
