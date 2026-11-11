@@ -78,13 +78,13 @@ export const COMPARISONS: readonly Comparison[] = [
       },
       {
         dimension: "Templates",
-        modo: "52 across 45 categories; 6 are Pro-only.",
+        modo: "62 across 46 categories, all included.",
         rival:
           "A far larger library, with a substantial part of it reserved for paid plans.",
       },
       {
         dimension: "Export watermarks",
-        modo: "None, on any plan — including free.",
+        modo: "None.",
         rival:
           "Exports are clean, but premium templates and stock elements need a paid plan to use.",
       },
@@ -118,7 +118,7 @@ export const COMPARISONS: readonly Comparison[] = [
       {
         title: "You want the largest possible library",
         body:
-          "52 templates is a curated set, not a catalogue. If your workflow is built on browsing thousands of options and stock photography, Modo will feel narrow.",
+          "62 templates is a curated set, not a catalogue. If your workflow is built on browsing thousands of options and stock photography, Modo will feel narrow.",
       },
     ],
     chooseModo: [
@@ -133,9 +133,9 @@ export const COMPARISONS: readonly Comparison[] = [
           "Three canvases, pre-sized and correct. No hunting through a size picker, no cropping surprises. The narrowness is the feature.",
       },
       {
-        title: "You want clean exports on the free plan",
+        title: "You'd rather pay once and keep your work local",
         body:
-          "PNG and JPEG at full resolution with no watermark, on every plan including free — plus the .modo project file if you want a backup. Nothing about export is held back for Pro.",
+          "Modo is a one-time purchase with no subscription and no account. Your designs and images stay in your browser, the editor works offline, and exports are full-resolution PNG and JPEG with no watermark — plus the .modo project file if you want a backup.",
       },
       {
         title: "You want less tool, not more",
@@ -154,15 +154,15 @@ export const COMPARISONS: readonly Comparison[] = [
       },
       {
         q: "Does Modo have as many templates as Canva?",
-        a: "Nowhere near. Modo has 52 templates across 45 categories, against a library that is orders of magnitude larger. The trade is that Modo picks one for you from your brief instead of asking you to browse.",
+        a: "Nowhere near. Modo has 62 templates across 46 categories, against a library that is orders of magnitude larger. The trade is that Modo picks one for you from your brief instead of asking you to browse.",
       },
       {
         q: "Do Modo's free exports have a watermark?",
-        a: "No. Exports are watermark-free on every plan, at full resolution, in PNG or JPEG. Modo's paid plan sells AI volume, storage and premium templates — not clean exports.",
+        a: "No. Exports are watermark-free, at full resolution, in PNG or JPEG.",
       },
       {
         q: "What does Modo cost?",
-        a: "There is a free plan with unlimited projects, 5 AI generations a month and 250 MB of image storage. Pro is $10/month and raises that to 100 generations and 1 GB, plus the premium templates. Cancel any time.",
+        a: "A one-time $79 for a lifetime license — no subscription, every template included, refundable within 14 days. AI generation runs on your own Anthropic API key, billed by Anthropic at typically about a cent per brief.",
       },
       {
         q: "Can I use both?",

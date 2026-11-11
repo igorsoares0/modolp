@@ -55,13 +55,12 @@ app/
   globals.css                  the design system (see below)
   opengraph-image.tsx          1200×630 social card, generated at build
   robots.ts · sitemap.ts
-  lib/site.ts                  canonical origin, app URLs, Pro price
+  lib/site.ts                  canonical origin, app URLs, license price, catalog counts
   lib/content/                 the SEO content families (see below)
     types.ts · formats.ts · comparisons.ts
   components/landing/
     navbar.tsx                 fixed nav + mobile drawer
-    editor-mock.tsx            hand-built replica of the editor (hero visual)
-    prompt-demo.tsx            the typing AI-bar stand-in
+    collage.tsx                hero visual
     faq.tsx · reveal.tsx · primitives.tsx · icons.tsx
   components/legal/legal-page.tsx    shared chrome for the three legal pages
   components/content/content-page.tsx  shared chrome for the SEO pages
@@ -96,9 +95,10 @@ appendix in `landing-copy.md`.
 `comparisons.ts` carries `rivalFactsCheckedOn`, which drives the page's sitemap
 `lastmod`. The rival column deliberately avoids prices and counts that churn.
 
-The CTAs on `/sizes/*` deep-link into the editor with `?format=<slug>`. That is
-inert until the editor honours it — see `designdocs/editor-integration.md`, which
-specifies that and the template-preview manifest the next content family needs.
+The CTAs on `/sizes/*` deep-link into the editor with a blank canvas of that
+format (`editorUrlForFormat()`), which the editor honours — see
+`designdocs/editor-integration.md` for that contract and the template-preview
+manifest the next content family needs.
 
 ## Design system
 
@@ -128,10 +128,13 @@ editor mock (a user's document doesn't repaint when the OS theme changes) and
 
 ## Content
 
-Page copy is not invented here — it tracks `designdocs/landing-copy.md`. That
-file ends with an appendix of **claims that are no longer true** (local-first
-storage, the $47 lifetime deal, "no account required"). Check it before adding
-a line to the page or reviving copy from an old deck.
+Modo is sold as a **one-time lifetime license** ($79, 14-day refund) with no
+accounts: designs and images stay in the user's browser, and AI runs on the
+user's own Anthropic API key. Every CTA goes to the editor, whose activation
+screen sells the license (Paddle) or accepts a key. Since 2026-11-10 the old
+subscription claims — free plan, AI credits, storage quotas, account sync,
+"Log in" — are the ones that are **no longer true**; don't revive them. Price,
+refund window and catalog counts live in `app/lib/site.ts`.
 
 ## Deployment
 

@@ -2,27 +2,42 @@
 // Used by metadataBase (layout), robots.ts, and sitemap.ts.
 export const SITE_URL = "https://getmodo.pro";
 
-/** The editor itself lives on its own subdomain — every CTA points there. */
+/**
+ * The editor lives on its own subdomain. Without a license it shows only the
+ * activation screen — paste a key, or buy one there (Paddle checkout, and the
+ * app activates itself when the payment lands). So every "Get Modo" CTA on
+ * this site goes to the app root.
+ */
 export const APP_URL = "https://app.getmodo.pro";
-export const SIGNUP_URL = `${APP_URL}/signup`;
-export const LOGIN_URL = `${APP_URL}/login`;
+export const GET_URL = APP_URL;
+/** For people who already have a key (purchase email, AppSumo). */
+export const ACTIVATE_URL = `${APP_URL}/activate`;
 
 /**
- * Pro price, kept in one place because it appears in the pricing card, the
- * Pro CTA label and the FAQ. If it changes in Paddle it changes here — and
- * in the app's upgrade modal, which hardcodes it too.
+ * The lifetime license. One place, because it appears in the pricing card,
+ * the CTAs, the FAQ, the terms and the refund policy. If it changes in Paddle
+ * it changes here — and in the app's NEXT_PUBLIC_LTD_PRICE_LABEL.
  */
-export const PRO_PRICE = "$10";
-export const PRO_PRICE_PERIOD = "/month";
+export const LTD_PRICE = "$79";
+export const REFUND_DAYS = 14;
+
+/** Catalog numbers, kept in step with the editor (app/data/templates.ts). */
+export const TEMPLATE_COUNT = 62;
+export const CATEGORY_COUNT = 46;
+
+/** The landing's format slugs → the editor's `?format=` values. */
+const EDITOR_FORMAT: Record<string, string> = {
+  "instagram-post": "post",
+  "instagram-story": "story",
+  "pinterest-pin": "pinterest",
+};
 
 /**
- * Deep link from a content page into the editor with the canvas preselected.
- *
- * The editor has to (a) read `format` and (b) carry it through signup and email
- * verification for this to land the visitor on the right canvas. Until it does,
- * the param is ignored and this degrades to a normal signup link — so it is safe
- * to ship first, but it is dead weight until the editor honours it.
+ * Deep link into the editor with a blank canvas of this format. A visitor with
+ * a license lands on it directly; one without sees the activation screen
+ * first, and the canvas opens right after activating.
  */
-export function signupUrlForFormat(formatSlug: string): string {
-  return `${SIGNUP_URL}?format=${encodeURIComponent(formatSlug)}`;
+export function editorUrlForFormat(formatSlug: string): string {
+  const format = EDITOR_FORMAT[formatSlug];
+  return format ? `${APP_URL}/?new=1&format=${format}` : GET_URL;
 }

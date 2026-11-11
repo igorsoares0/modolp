@@ -3,7 +3,6 @@ import { Navbar } from "./components/landing/navbar";
 import { Faq } from "./components/landing/faq";
 import { Reveal } from "./components/landing/reveal";
 import { Collage } from "./components/landing/collage";
-import { BriefBar } from "./components/landing/brief-bar";
 import {
   Kicker,
   Wordmark,
@@ -15,7 +14,14 @@ import {
   TextIcon,
   DownloadIcon,
 } from "./components/landing/icons";
-import { LOGIN_URL, PRO_PRICE, SIGNUP_URL } from "./lib/site";
+import {
+  ACTIVATE_URL,
+  CATEGORY_COUNT,
+  GET_URL,
+  LTD_PRICE,
+  REFUND_DAYS,
+  TEMPLATE_COUNT,
+} from "./lib/site";
 
 type Step = {
   code: string;
@@ -30,7 +36,7 @@ const STEPS: Step[] = [
   {
     code: "01",
     title: "Pick a format",
-    body: "Instagram post, story or Pinterest pin. Start from one of 52 templates or a blank page.",
+    body: `Instagram post, story or Pinterest pin. Start from one of ${TEMPLATE_COUNT} templates or a blank page.`,
     icon: TemplatesIcon,
     tile: "bg-tool-templates text-tool-fg",
   },
@@ -44,7 +50,7 @@ const STEPS: Step[] = [
   {
     code: "03",
     title: "Export",
-    body: "PNG or JPG at the exact size each platform expects. Your projects stay saved for later.",
+    body: "PNG or JPG at the exact size each platform expects. Your projects stay saved on your device.",
     icon: DownloadIcon,
     tile: "bg-tool-uploads text-tool-fg",
   },
@@ -61,10 +67,10 @@ type Feature = {
 const FEATURES: Feature[] = [
   {
     title: "Write a line. Get a design.",
-    body: "Describe the post and Modo builds it — template, copy, palette, fonts, layout, background. Fully editable the moment it lands on the canvas.",
+    body: "Describe the post and Modo builds it — template, copy, palette, fonts, layout, background. Fully editable the moment it lands on the canvas. Runs on your own Anthropic API key: no credits, no monthly cap, about a cent a brief.",
   },
   {
-    title: "52 templates, 45 categories.",
+    title: `${TEMPLATE_COUNT} templates, ${CATEGORY_COUNT} categories.`,
     body: "Wellness, Promo, Story, Pinterest, Podcast, Event, Business, Fashion, Food, Fitness, Travel, Tech, Wedding, Real Estate and more. Search them, preview them, duplicate them, make them yours.",
   },
   {
@@ -80,7 +86,7 @@ const FEATURES: Feature[] = [
   },
   {
     title: "Upload, edit, done.",
-    body: "Resize, rotate, crop, flip, adjust opacity, add border radius and shadow. Uploads land in your account, so the same image is there on your laptop and your desktop.",
+    body: "Resize, rotate, crop, flip, adjust opacity, add border radius and shadow. Uploads are kept in a library on your device, ready to reuse in any design.",
   },
   {
     title: "Make it pop.",
@@ -91,37 +97,23 @@ const FEATURES: Feature[] = [
     body: "Lock, hide, duplicate, reorder — full layer management. Unlimited undo and redo, so you can experiment without fear.",
   },
   {
-    title: "Start on your laptop. Finish on your desktop.",
-    body: "Your projects and uploads live in your account and follow you to any browser you sign in from. Nothing to export, nothing to email yourself. And if your connection drops mid-edit, Modo keeps working and syncs the moment you're back.",
+    title: "Your work stays yours.",
+    body: "No account, no cloud. Projects and uploads live in your browser and never touch our servers, and the editor works offline. Moving to another computer? Back everything up to one file and restore it there.",
   },
   {
     title: "High-res exports. No watermark. Ever.",
-    body: "PNG or JPEG with quality control and transparent background support — clean output on every plan, including Free. You can also export the project file itself (.modo) to keep a backup or hand it to someone else.",
+    body: "PNG or JPEG with quality control and transparent background support. You can also export the project file itself (.modo), images included, to keep a backup or hand it to someone else.",
   },
 ];
 
-/** Spec-sheet rows. 6 of the 52 templates are Pro-only, so Free sees 46. */
-const PLANS = [
-  {
-    name: "Free",
-    price: "$0",
-    rows: [
-      { k: "Storage", v: "250 MB" },
-      { k: "AI briefs", v: "5 / MO" },
-      { k: "Templates", v: "46 OF 52" },
-    ],
-    pro: false,
-  },
-  {
-    name: "Pro",
-    price: `${PRO_PRICE} / MO`,
-    rows: [
-      { k: "Storage", v: "1 GB" },
-      { k: "AI briefs", v: "100 / MO" },
-      { k: "Templates", v: "ALL 52" },
-    ],
-    pro: true,
-  },
+/** The one plan, as a spec sheet. */
+const LICENSE_ROWS = [
+  { k: "Price", v: `${LTD_PRICE} ONCE` },
+  { k: "Templates", v: `ALL ${TEMPLATE_COUNT}` },
+  { k: "Updates", v: "INCLUDED" },
+  { k: "Devices", v: "ALL YOURS" },
+  { k: "AI briefs", v: "YOUR ANTHROPIC KEY" },
+  { k: "Storage", v: "ON YOUR DEVICE" },
 ];
 
 const footerLink =
@@ -180,9 +172,16 @@ export default function Home() {
                 and layout like a designer would. Export for Instagram and
                 Pinterest.
               </p>
-              <BriefBar />
+              <div className="flex flex-wrap gap-3">
+                <PrimaryButton href={GET_URL} target="_blank">
+                  Get Modo — {LTD_PRICE}
+                </PrimaryButton>
+                <SecondaryButton href="#how-it-works">
+                  How it works
+                </SecondaryButton>
+              </div>
               <span className="font-mono text-[12px] text-text-tertiary">
-                FREE · NO CARD · 5 AI BRIEFS A MONTH
+                ONE PAYMENT · LIFETIME LICENSE · {REFUND_DAYS}-DAY REFUND
               </span>
             </div>
 
@@ -272,61 +271,49 @@ export default function Home() {
           <SplitSection
             id="pricing"
             kicker="Pricing"
-            title="Two plans. No seats."
+            title="Pay once. Keep it."
+            aside={
+              <p className="text-[15px] leading-[1.55] text-text-secondary [text-wrap:pretty]">
+                No subscription, no credits, no seats. AI runs on your own
+                Anthropic key, so you pay Anthropic for what you use and
+                nothing to us after today.
+              </p>
+            }
           >
-            <div className="grid border border-border-strong md:grid-cols-2">
-              {PLANS.map((plan) => (
-                <div
-                  key={plan.name}
-                  className={`flex flex-col gap-[18px] p-7 ${
-                    plan.pro
-                      ? "bg-surface-1"
-                      : "border-b border-border-strong md:border-b-0 md:border-r"
-                  }`}
-                >
-                  <div className="flex items-baseline justify-between">
-                    <h3 className="font-expanded text-[24px] font-extrabold">
-                      {plan.name}
-                    </h3>
-                    <span className="font-mono text-[13px] font-medium tabular-nums">
-                      {plan.price}
-                    </span>
+            <div className="flex flex-col gap-[18px] border border-border-strong bg-surface-1 p-7">
+              <div className="flex items-baseline justify-between">
+                <h3 className="font-expanded text-[24px] font-extrabold">
+                  Lifetime license
+                </h3>
+                <span className="font-mono text-[13px] font-medium tabular-nums">
+                  {LTD_PRICE}
+                </span>
+              </div>
+              <dl className="flex flex-col border-t border-border-default">
+                {LICENSE_ROWS.map((row) => (
+                  <div
+                    key={row.k}
+                    className="flex justify-between gap-4 border-b border-border-default py-2.5 text-[14px]"
+                  >
+                    <dt className="text-text-secondary">{row.k}</dt>
+                    <dd className="text-right font-mono text-[13px] font-medium tabular-nums">
+                      {row.v}
+                    </dd>
                   </div>
-                  <dl className="flex flex-col border-t border-border-default">
-                    {plan.rows.map((row) => (
-                      <div
-                        key={row.k}
-                        className="flex justify-between border-b border-border-default py-2.5 text-[14px]"
-                      >
-                        <dt className="text-text-secondary">{row.k}</dt>
-                        <dd className="font-mono text-[13px] font-medium tabular-nums">
-                          {row.v}
-                        </dd>
-                      </div>
-                    ))}
-                  </dl>
-                  {plan.pro ? (
-                    <PrimaryButton
-                      href={SIGNUP_URL}
-                      target="_blank"
-                      className="self-start"
-                    >
-                      Go Pro
-                    </PrimaryButton>
-                  ) : (
-                    <SecondaryButton
-                      href={SIGNUP_URL}
-                      target="_blank"
-                      className="self-start"
-                    >
-                      Start free
-                    </SecondaryButton>
-                  )}
-                </div>
-              ))}
+                ))}
+              </dl>
+              <div className="flex flex-wrap items-center gap-3">
+                <PrimaryButton href={GET_URL} target="_blank">
+                  Get Modo
+                </PrimaryButton>
+                <SecondaryButton href={ACTIVATE_URL} target="_blank">
+                  I have a key
+                </SecondaryButton>
+              </div>
             </div>
             <p className="mt-4 font-mono text-[11px] text-text-tertiary">
-              CANCEL ANY TIME · BILLED THROUGH PADDLE
+              ONE-TIME PAYMENT · {REFUND_DAYS}-DAY REFUND, NO QUESTIONS · BILLED
+              THROUGH PADDLE
             </p>
           </SplitSection>
 
@@ -346,12 +333,12 @@ export default function Home() {
                 Your next post is one sentence away.
               </h2>
               <span className="font-mono text-[12px] text-text-tertiary">
-                FREE · NO CARD · NOTHING TO INSTALL
+                ONE PAYMENT · NO SUBSCRIPTION · NOTHING TO INSTALL
               </span>
             </Reveal>
             <Reveal delay={1} className="flex flex-wrap gap-3">
-              <PrimaryButton href={SIGNUP_URL} target="_blank">
-                Start free
+              <PrimaryButton href={GET_URL} target="_blank">
+                Get Modo — {LTD_PRICE}
               </PrimaryButton>
               <SecondaryButton href="#templates">
                 See the templates
@@ -379,12 +366,12 @@ export default function Home() {
               vs Canva
             </Link>
             <a
-              href={LOGIN_URL}
+              href={ACTIVATE_URL}
               target="_blank"
               rel="noopener noreferrer"
               className={footerLink}
             >
-              Log in
+              Activate a key
             </a>
             <Link href="/privacy" className={footerLink}>
               Privacy

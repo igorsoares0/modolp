@@ -9,7 +9,7 @@ import {
 } from "../../components/content/content-page";
 import { Eyebrow, PrimaryButton } from "../../components/landing/primitives";
 import { COMPARISONS, getComparison } from "../../lib/content/comparisons";
-import { SIGNUP_URL } from "../../lib/site";
+import { GET_URL, LTD_PRICE } from "../../lib/site";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -128,11 +128,11 @@ export default async function ComparisonPage({ params }: Props) {
           Try it on your next post.
         </h2>
         <p className="mx-auto mt-3 max-w-lg text-[14.5px] leading-[1.65] text-text-secondary [text-wrap:pretty]">
-          Describe what you need in one line and see what comes back. Free plan,
-          no credit card, and exports have no watermark on any plan.
+          Describe what you need in one line and see what comes back. One
+          payment, no subscription, and exports never carry a watermark.
         </p>
-        <PrimaryButton href={SIGNUP_URL} target="_blank" className="mt-6">
-          Start free
+        <PrimaryButton href={GET_URL} target="_blank" className="mt-6">
+          Get Modo — {LTD_PRICE}
         </PrimaryButton>
       </section>
 

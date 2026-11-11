@@ -1,14 +1,14 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 import { Wordmark } from "../landing/primitives";
-import { LOGIN_URL, SIGNUP_URL } from "../../lib/site";
+import { ACTIVATE_URL, GET_URL } from "../../lib/site";
 
 /**
  * Shared chrome for editorial/SEO pages (/sizes and the families that follow).
  *
  * Deliberately not the landing's <Navbar>: that one is fixed, has a mobile
  * drawer and anchors to on-page sections that don't exist here. This is the
- * legal-page pattern widened, with a real signup CTA in the header — a visitor
+ * legal-page pattern widened, with a real "Get Modo" CTA in the header — a visitor
  * arriving cold from search has no other route into the product.
  */
 
@@ -39,20 +39,20 @@ export function ContentPage({
           </Link>
           <div className="flex-1" />
           <a
-            href={LOGIN_URL}
+            href={ACTIVATE_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="hidden items-center border-l border-border-default px-6 text-[14px] font-semibold text-text-primary transition-colors duration-150 ease-standard hover:bg-surface-3 sm:flex"
           >
-            Log in
+            Activate
           </a>
           <a
-            href={SIGNUP_URL}
+            href={GET_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center bg-accent px-5 font-expanded text-[14px] font-extrabold uppercase tracking-[0.02em] text-accent-fg transition-colors duration-150 ease-standard hover:bg-accent-hover sm:px-7"
           >
-            Start free
+            Get Modo
           </a>
         </nav>
       </header>

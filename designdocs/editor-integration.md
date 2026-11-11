@@ -12,6 +12,18 @@
 > suggestion, every "what" is a requirement. If the editor already does one of
 > these, say so and strike it.
 
+> **Update — 2026-11-10 (local-first lifetime license).** The editor no longer
+> has accounts: no `/signup`, `/login`, password reset or email verification.
+> Without a license it shows only an activation screen; `/activate#key=…`
+> activates a key in one click. What that changes below:
+>
+> - **§1** — the auth routes it lists are gone; only `/`, `/dashboard` and
+>   `/activate` remain to keep out of the index.
+> - **§2 is resolved.** The landing links to `/?new=1&format=post|story|pinterest`
+>   (`editorUrlForFormat()` in `app/lib/site.ts` maps the landing's slugs). The
+>   editor already honours it, and the params survive the activation screen, so
+>   a visitor who activates or buys there lands on the right canvas.
+
 ---
 
 ## Why any of this

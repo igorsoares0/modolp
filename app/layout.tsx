@@ -22,9 +22,9 @@ const plexMono = IBM_Plex_Mono({
 });
 
 const DESCRIPTION =
-  "Start from a template or a one-line brief, then adjust type, color and layout like a designer would. Instagram and Pinterest posts, free plan, no watermark.";
+  "Start from a template or a one-line brief, then adjust type, color and layout like a designer would. Instagram and Pinterest posts, no watermark. One payment, yours for good.";
 const OG_DESCRIPTION =
-  "Modo is a fast design editor for social posts — 52 templates, AI briefs and watermark-free export, in your browser.";
+  "Modo is a fast design editor for social posts — 62 templates, AI briefs and watermark-free export, in your browser. One payment, no subscription.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

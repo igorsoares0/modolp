@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ContentPage } from "../components/content/content-page";
 import { Eyebrow, PrimaryButton } from "../components/landing/primitives";
 import { FORMATS } from "../lib/content/formats";
-import { SIGNUP_URL } from "../lib/site";
+import { GET_URL, LTD_PRICE } from "../lib/site";
 
 export const metadata: Metadata = {
   title: "Social Media Image Sizes (2026) — Instagram, Stories & Pinterest",
@@ -109,11 +109,11 @@ export default function SizesHubPage() {
         </h2>
         <p className="mx-auto mt-3 max-w-lg text-[14.5px] leading-[1.65] text-text-secondary [text-wrap:pretty]">
           Pick the canvas, describe the post, and Modo builds the design — copy,
-          palette, type and layout. Export at full resolution with no watermark,
-          including on the free plan.
+          palette, type and layout. Export at full resolution with no watermark.
+          One payment, yours for good.
         </p>
-        <PrimaryButton href={SIGNUP_URL} target="_blank" className="mt-6">
-          Start free
+        <PrimaryButton href={GET_URL} target="_blank" className="mt-6">
+          Get Modo — {LTD_PRICE}
         </PrimaryButton>
       </section>
     </ContentPage>

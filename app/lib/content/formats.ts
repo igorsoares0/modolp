@@ -110,8 +110,8 @@ export const FORMATS: readonly CanvasFormat[] = [
         a: "PNG if the design is type, flat colour or sharp edges — it stays crisp. JPEG if the design is mostly a photograph, where the file size saving is worth it and the compression is far less visible.",
       },
       {
-        q: "Can I make a 1080×1080 post for free in Modo?",
-        a: "Yes. The square canvas is a preset on every plan, and exports are full-resolution with no watermark — including on the free plan.",
+        q: "Does Modo have a 1080×1080 preset?",
+        a: "Yes. The square canvas is a built-in preset, and exports are full-resolution with no watermark.",
       },
     ],
   },
@@ -184,7 +184,7 @@ export const FORMATS: readonly CanvasFormat[] = [
       },
       {
         q: "Does Modo have a Story canvas?",
-        a: "Yes — 1080 × 1920 is a preset, available on every plan, with watermark-free export.",
+        a: "Yes — 1080 × 1920 is a built-in preset, with watermark-free export.",
       },
     ],
   },

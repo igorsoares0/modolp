@@ -4,13 +4,13 @@ import { LegalPage } from "../components/legal/legal-page";
 export const metadata: Metadata = {
   title: "Privacy Policy — Modo",
   description:
-    "How Modo handles your data: what we store in your account, who processes it, and how to delete it.",
+    "How Modo handles your data: your designs, images and AI key stay on your device; we only keep a record of your license.",
   alternates: { canonical: "/privacy" },
 };
 
 export default function PrivacyPage() {
   return (
-    <LegalPage title="Privacy Policy" updated="August 7, 2026">
+    <LegalPage title="Privacy Policy" updated="November 10, 2026">
       <p>
         This Privacy Policy explains how <strong>Igor Soares Pinto</strong>, an
         individual based in Brazil trading as <strong>Modo Design</strong>
@@ -20,166 +20,146 @@ export default function PrivacyPage() {
         described below.
       </p>
       <p>
-        In short: Modo needs an account, and{" "}
+        In short: Modo has <strong>no accounts</strong>, and{" "}
         <strong>
-          your projects and uploaded images are stored on our servers
+          your designs, uploaded images and AI key never leave your device
         </strong>{" "}
-        so that they follow you between devices. We keep the data set small, we
-        do not sell it, and we do not use your designs to train AI models.
+        — they live in your browser, and we never receive them. The only
+        personal data we keep is the record of the license you bought.
       </p>
 
-      <h2>1. Data we collect</h2>
-
-      <h3>Account data</h3>
+      <h2>1. Data that stays on your device</h2>
       <p>
-        Your email address, a securely hashed version of your password, whether
-        you have confirmed your email, your plan and usage counters (AI
-        generations used this month, storage used), and timestamps such as when
-        the account was created and last used. We never store your password in
-        readable form.
+        Your projects, the images you upload, your editor preferences, your
+        license key and your Anthropic API key are stored in your browser&rsquo;s
+        local storage (IndexedDB). They are not sent to us, and we have no copy
+        of them. Clearing your browser&rsquo;s site data deletes them — which is
+        why the app lets you back everything up to a file.
       </p>
 
-      <h3>Your projects and uploads</h3>
+      <h2>2. Data we collect</h2>
+
+      <h3>License records</h3>
       <p>
-        The designs you create — text, layout, colors, fonts, and the settings of
-        every layer — are stored in our database so they are available wherever
-        you sign in. The images you upload are stored in object storage. Your
-        browser also keeps a local copy of your projects so the editor keeps
-        working when you are offline; that copy is a cache and a sync buffer, and
-        you can clear it through your browser at any time.
-      </p>
-      <p>
-        We access this content only when it is necessary to operate the Service,
-        investigate a technical problem, respond to a support request you have
-        made, or comply with a legal obligation.
+        When you buy a license we keep a small record of it: a license
+        identifier, where it was bought (direct or through a marketplace such as
+        AppSumo), the purchase reference (a Paddle transaction id or the
+        marketplace&rsquo;s license key), its status (active or refunded), and
+        timestamps. For direct purchases we also keep the email address you used
+        at checkout, so we can send you your key and help you if you lose it.
+        Marketplace purchases come to us without an email address.
       </p>
 
-      <h3>AI briefs</h3>
+      <h3>License checks</h3>
       <p>
-        When you use the AI generation feature, the text of your brief is sent to
-        our AI provider so it can return a design. See{" "}
-        <a href="#ai">section 4</a> for details, including what the provider may
-        and may not do with it. Please do not put personal or confidential
-        information into a brief.
+        Your key is verified on your device, without contacting us. When you are
+        online, the app also asks our server — at most once a day — whether your
+        license is still active (for example, that it was not refunded). That
+        request carries only the license identifier; like any web request, our
+        server sees your IP address.
       </p>
 
       <h3>Purchase data</h3>
       <p>
-        When you subscribe to Pro, the transaction is handled by{" "}
-        <strong>Paddle</strong>, our Merchant of Record. Paddle collects the
-        information needed to process your payment (such as name, email, billing
-        address, and tax location) and shares limited order details with us (such
-        as your email, subscription status, and renewal date) so we can activate
-        your plan and provide support. We do not receive or store your full card
+        Direct purchases are handled by <strong>Paddle</strong>, our Merchant of
+        Record. Paddle collects what it needs to process your payment (such as
+        name, email, billing address and tax location) and shares limited order
+        details with us (such as your email and the transaction id) so we can
+        issue your license and provide support. We never receive your card
         details. See the{" "}
-        <a href="https://www.paddle.com/legal/privacy">Paddle Privacy Policy</a>.
+        <a href="https://www.paddle.com/legal/privacy">Paddle Privacy Policy</a>
+        . If you buy through a marketplace such as AppSumo, its own privacy
+        policy applies to the purchase.
       </p>
 
       <h3>Support and communications</h3>
       <p>
         If you email us, we receive your email address and the contents of your
-        message so we can respond. We also send transactional emails you cannot
-        opt out of while you have an account — email confirmation, password
-        resets, and important notices about your subscription or these policies.
+        message so we can respond. After a direct purchase we send you a
+        transactional email with your license key.
       </p>
 
       <h3>Technical and security data</h3>
       <p>
-        When you use the Service, standard technical information — IP address,
-        browser and device type, and timestamps — is processed in server logs to
-        deliver the application, keep accounts secure, detect abuse, and debug
-        errors. These logs are kept for a limited period and are not used to
-        build a profile of you.
+        Loading the app and the license checks are processed in server logs —
+        IP address, browser type and timestamps — to deliver the Service, detect
+        abuse and debug errors. These logs are kept for a limited period and are
+        not used to build a profile of you.
       </p>
 
-      <h2>2. How we use data</h2>
+      <h2 id="ai">3. AI generation and your data</h2>
+      <p>
+        The AI feature runs on <strong>your own Anthropic account</strong>. When
+        you generate a design, your browser sends the text of your brief and a
+        description of the chosen template directly to{" "}
+        <strong>Anthropic</strong> (the provider of the Claude models), using the
+        API key you entered in the app.
+      </p>
       <ul>
-        <li>to create and secure your account and authenticate you;</li>
         <li>
-          to store, sync, and export your projects and uploads across your
-          devices;
+          These requests go straight from your device to Anthropic.{" "}
+          <strong>They do not pass through our servers</strong>, and we cannot
+          see your briefs, the results or your API key.
         </li>
-        <li>to generate designs when you ask the AI feature to;</li>
-        <li>to enforce plan allowances and show your usage;</li>
-        <li>to process subscriptions and renewals (via Paddle);</li>
-        <li>to respond to support requests and send service notices;</li>
-        <li>to detect, prevent, and address security, abuse, or technical issues;</li>
-        <li>to comply with legal, tax, and accounting obligations.</li>
+        <li>
+          Anthropic processes them under the agreement between you and
+          Anthropic (its commercial API terms and privacy policy), not as our
+          service provider. Usage is billed to your Anthropic account.
+        </li>
+        <li>
+          Because a brief is free text, anything you type into it is sent. Do
+          not include personal data about others or confidential information.
+        </li>
+      </ul>
+
+      <h2>4. How we use data</h2>
+      <ul>
+        <li>to issue, deliver and verify your license;</li>
+        <li>to deactivate a license that was refunded or charged back;</li>
+        <li>to respond to support requests;</li>
+        <li>to detect, prevent and address security, abuse or technical issues;</li>
+        <li>to comply with legal, tax and accounting obligations.</li>
       </ul>
       <p>
         We do not sell your personal data, we do not use it for advertising, and
-        we do not use your projects, uploads, or briefs to train AI models.
+        we do not use anything you make with Modo to train AI models — we never
+        receive it.
       </p>
 
-      <h2>3. Legal bases</h2>
+      <h2>5. Legal bases</h2>
       <p>
         Where the Brazilian General Data Protection Law (LGPD) or the GDPR
         applies, we process personal data on the bases of{" "}
-        <strong>performance of a contract</strong> (creating your account,
-        storing and syncing your work, running AI generations you request,
-        handling your subscription), our{" "}
-        <strong>legitimate interests</strong> (securing the Service, preventing
-        abuse, fixing faults), <strong>your consent</strong> where it is
-        required, and <strong>compliance with legal obligations</strong> (tax and
-        accounting records).
+        <strong>performance of a contract</strong> (issuing and verifying the
+        license you bought), our <strong>legitimate interests</strong> (securing
+        the Service, preventing abuse, fixing faults), and{" "}
+        <strong>compliance with legal obligations</strong> (tax and accounting
+        records).
       </p>
 
-      <h2 id="ai">4. AI generation and your data</h2>
+      <h2>6. Who processes your data</h2>
       <p>
-        The AI feature works by sending the text of your brief to{" "}
-        <strong>Anthropic</strong> (the provider of the Claude models), which
-        returns the copy, palette, font pairing, and layout values that Modo
-        applies to a template.
-      </p>
-      <ul>
-        <li>
-          Only the brief and the technical parameters of the request are sent.
-          Your account email, your other projects, and your uploaded images are
-          not sent.
-        </li>
-        <li>
-          Anthropic processes this data as our service provider under its
-          commercial API terms and{" "}
-          <strong>does not use it to train its models</strong>.
-        </li>
-        <li>
-          This processing happens outside Brazil and outside the European
-          Economic Area — see <a href="#transfers">section 9</a>.
-        </li>
-        <li>
-          Because a brief is free text, anything you type into it is sent. Do not
-          include personal data about yourself or others, or confidential
-          information.
-        </li>
-      </ul>
-
-      <h2>5. Who processes your data</h2>
-      <p>
-        We do not sell your personal data. We share it only with the service
-        providers we need in order to run Modo, each bound by contractual
-        confidentiality and data-protection obligations:
+        We share data only with the service providers we need in order to run
+        Modo, each bound by contractual confidentiality and data-protection
+        obligations:
       </p>
       <ul>
         <li>
           <strong>Paddle</strong> — payment processing and invoicing as Merchant
-          of Record.
+          of Record for direct purchases.
         </li>
         <li>
-          <strong>Neon</strong> — managed PostgreSQL database hosting for account
-          data and projects.
+          <strong>AppSumo</strong> and other marketplaces — for licenses bought
+          through them, which tell us when a license is purchased, activated or
+          refunded.
         </li>
         <li>
-          <strong>Cloudflare</strong> — object storage (R2) for the images you
-          upload, plus network and security services.
+          <strong>Neon</strong> — managed PostgreSQL database hosting for license
+          records.
         </li>
         <li>
-          <strong>Anthropic</strong> — AI processing of the briefs you submit,
-          as described above.
-        </li>
-        <li>
-          our hosting and transactional email providers, used to run the
-          application and to send account emails such as confirmations and
-          password resets.
+          our hosting and transactional email providers, used to serve the
+          application and to send license emails.
         </li>
       </ul>
       <p>
@@ -187,25 +167,25 @@ export default function PrivacyPage() {
         establish, exercise, or defend legal claims.
       </p>
 
-      <h2>6. Cookies and local storage</h2>
+      <h2>7. Cookies and local storage</h2>
       <p>
-        We use only what is necessary to run the Service: a cookie that keeps you
-        signed in, and browser storage (including IndexedDB) that holds the local
-        copy of your projects and your editor preferences. We do not use
-        advertising cookies or third-party tracking. Payment pages provided by
-        Paddle may set their own cookies, governed by Paddle&rsquo;s policy.
+        We do not set tracking or advertising cookies. The app uses your
+        browser&rsquo;s local storage, as described in section 1, to hold your
+        work, your license and your preferences on your device. Payment pages
+        provided by Paddle may set their own cookies, governed by Paddle&rsquo;s
+        policy.
       </p>
 
-      <h2>7. Data retention</h2>
+      <h2>8. Data retention</h2>
       <ul>
         <li>
-          <strong>Projects and uploads</strong> — kept while your account is
-          active. When you delete a project, or your account, we delete the
-          associated records and files; residual copies in encrypted backups
-          expire on their normal rotation schedule, within 30 days.
+          <strong>Data on your device</strong> — stays until you delete it, in
+          the app or by clearing your browser&rsquo;s site data. We cannot
+          recover it for you.
         </li>
         <li>
-          <strong>Account data</strong> — kept until you delete your account.
+          <strong>License records</strong> — kept for as long as the license
+          exists, so it keeps working and can be recovered.
         </li>
         <li>
           <strong>Server logs</strong> — kept for a limited period for security
@@ -213,55 +193,49 @@ export default function PrivacyPage() {
         </li>
         <li>
           <strong>Billing records</strong> — retained by us and by Paddle for as
-          long as tax and accounting law requires, even after you close your
-          account.
+          long as tax and accounting law requires.
         </li>
       </ul>
-      <p>
-        You can delete your account from within the app. To have it done for you,
-        write to{" "}
-        <a href="mailto:contact@getmodo.pro">contact@getmodo.pro</a> from your
-        account&rsquo;s email address.
-      </p>
 
-      <h2>8. Your rights</h2>
+      <h2>9. Your rights</h2>
       <p>
         Depending on where you live, you may have the right to access, correct,
         delete, or port your personal data, to object to or restrict certain
-        processing, to withdraw consent, and to know with whom we share your
-        data. Under the LGPD you may also ask us to confirm whether we process
-        your data and to anonymize unnecessary or excessive data.
+        processing, and to know with whom we share your data. Under the LGPD you
+        may also ask us to confirm whether we process your data and to anonymize
+        unnecessary or excessive data.
       </p>
       <p>
-        You can exercise most of these directly in the app: your projects are
-        exportable as <strong>.modo</strong> files, and your account is deletable
-        from your settings. For anything else, contact us at{" "}
+        Everything you make is already in your hands: export projects as{" "}
+        <strong>.modo</strong> files or back up everything from the app&rsquo;s
+        settings. For your license record, contact us at{" "}
         <a href="mailto:contact@getmodo.pro">contact@getmodo.pro</a> and we will
         respond within the period required by applicable law. For data held by
-        Paddle as part of a purchase, you may also contact Paddle directly. You
-        also have the right to complain to your local data-protection authority —
-        the ANPD in Brazil.
+        Paddle or a marketplace as part of a purchase, you may also contact them
+        directly. You also have the right to complain to your local
+        data-protection authority — the ANPD in Brazil.
       </p>
 
-      <h2 id="transfers">9. International transfers</h2>
+      <h2 id="transfers">10. International transfers</h2>
       <p>
-        We are based in Brazil and our providers — including Paddle, Neon,
-        Cloudflare, and Anthropic — process data in other countries, including
-        the United States and the European Union. Where required, these transfers
-        are covered by appropriate safeguards, such as the European
-        Commission&rsquo;s Standard Contractual Clauses or an equivalent
-        mechanism under the LGPD.
+        We are based in Brazil and our providers — including Paddle, AppSumo and
+        Neon — process data in other countries, including the United States and
+        the European Union. Where required, these transfers are covered by
+        appropriate safeguards, such as the European Commission&rsquo;s Standard
+        Contractual Clauses or an equivalent mechanism under the LGPD.
       </p>
 
-      <h2>10. Security</h2>
+      <h2>11. Security</h2>
       <p>
-        We protect your data with encryption in transit, hashed passwords, access
-        controls, and encrypted storage at rest with our providers. No service
-        can promise perfect security. If a breach affects your personal data, we
-        will notify you and the relevant authority as required by law.
+        We protect the data we hold with encryption in transit, access controls,
+        and encrypted storage at rest with our providers. Your license key is
+        cryptographically signed, so it cannot be forged. The data on your device
+        is protected by your device and browser — keep them secure. If a breach
+        affects personal data we hold, we will notify you and the relevant
+        authority as required by law.
       </p>
 
-      <h2>11. Children</h2>
+      <h2>12. Children</h2>
       <p>
         The Service is not directed to children. You must be at least 18, or old
         enough to enter into a contract where you live and have permission from a
@@ -270,14 +244,14 @@ export default function PrivacyPage() {
         will delete it.
       </p>
 
-      <h2>12. Changes to this policy</h2>
+      <h2>13. Changes to this policy</h2>
       <p>
         We may update this Privacy Policy from time to time. We will revise the
         &ldquo;Last updated&rdquo; date above and, for material changes, notify
-        account holders by email.
+        direct buyers by email.
       </p>
 
-      <h2>13. Contact</h2>
+      <h2>14. Contact</h2>
       <p>
         For any privacy question or request, contact us at{" "}
         <a href="mailto:contact@getmodo.pro">contact@getmodo.pro</a>.

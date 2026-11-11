@@ -11,7 +11,7 @@ import {
 } from "../../components/content/content-page";
 import { Eyebrow, PrimaryButton } from "../../components/landing/primitives";
 import { FORMATS, getFormat } from "../../lib/content/formats";
-import { signupUrlForFormat } from "../../lib/site";
+import { editorUrlForFormat, LTD_PRICE } from "../../lib/site";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -104,11 +104,11 @@ export default async function FormatSizePage({ params }: Props) {
       </div>
 
       <div className="mt-8 flex flex-wrap items-center gap-4">
-        <PrimaryButton href={signupUrlForFormat(format.slug)} target="_blank">
+        <PrimaryButton href={editorUrlForFormat(format.slug)} target="_blank">
           Open a {format.width} × {format.height} canvas
         </PrimaryButton>
         <span className="text-[13px] text-text-tertiary">
-          Free plan, no watermark on export.
+          {LTD_PRICE} once, lifetime license. No watermark on export.
         </span>
       </div>
 

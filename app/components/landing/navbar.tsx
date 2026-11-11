@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { MenuIcon, CloseIcon } from "./icons";
 import { Wordmark } from "./primitives";
-import { LOGIN_URL, SIGNUP_URL } from "../../lib/site";
+import { ACTIVATE_URL, GET_URL } from "../../lib/site";
 
 const LINKS = [
   { label: "Templates", href: "#templates" },
@@ -42,20 +42,20 @@ export function Navbar() {
         <div className="flex-1" />
 
         <a
-          href={LOGIN_URL}
+          href={ACTIVATE_URL}
           target="_blank"
           rel="noopener noreferrer"
           className={`${cell} hidden border-l px-6 text-[14px] font-semibold text-text-primary transition-colors duration-150 ease-standard hover:bg-surface-3 md:flex`}
         >
-          Log in
+          Activate
         </a>
         <a
-          href={SIGNUP_URL}
+          href={GET_URL}
           target="_blank"
           rel="noopener noreferrer"
           className={`${cell} bg-accent px-5 font-expanded text-[14px] font-extrabold uppercase tracking-[0.02em] text-accent-fg transition-colors duration-150 ease-standard hover:bg-accent-hover sm:px-7`}
         >
-          Start free
+          Get Modo
         </a>
         <button
           type="button"
@@ -110,12 +110,12 @@ export function Navbar() {
           ))}
 
           <a
-            href={LOGIN_URL}
+            href={ACTIVATE_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="px-5 py-4 text-[15px] font-semibold text-text-primary hover:bg-surface-3"
           >
-            Log in
+            Activate a key
           </a>
         </aside>
       </div>
