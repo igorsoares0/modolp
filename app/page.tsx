@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Navbar } from "./components/landing/navbar";
 import { Faq } from "./components/landing/faq";
@@ -125,12 +126,15 @@ function SplitSection({
   kicker,
   title,
   aside,
+  figure,
   children,
 }: {
   id?: string;
   kicker: string;
   title: React.ReactNode;
   aside?: React.ReactNode;
+  /** Illustration under the headline column. */
+  figure?: React.ReactNode;
   children: React.ReactNode;
 }) {
   return (
@@ -142,6 +146,7 @@ function SplitSection({
         <Kicker>{kicker}</Kicker>
         <h2 className="type-display-lg">{title}</h2>
         {aside}
+        {figure}
       </Reveal>
       <Reveal delay={1}>{children}</Reveal>
     </section>
@@ -160,19 +165,21 @@ export default function Home() {
       >
         <main className="flex flex-col">
           {/* ── Hero ─────────────────────────────────────────────────── */}
-          <section className="grid border-b border-border-default lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
-            <div className="flex flex-col gap-7 border-b border-border-default px-4 pb-14 pt-14 sm:px-6 md:px-14 lg:border-b-0 lg:border-r lg:pt-[72px]">
+          {/* Classic centred stack: headline, pitch, CTAs, then the editor
+              itself — the product is the hero image. */}
+          <section className="flex flex-col items-center gap-12 border-b border-border-default px-4 pb-14 pt-14 sm:px-6 md:px-14 lg:gap-16 lg:pt-[88px]">
+            <div className="flex max-w-[1100px] flex-col items-center gap-7 text-center">
               <Kicker>Nº 001 — A design tool for social posts</Kicker>
               <h1 className="type-display-xl">
                 Posts that look made, not generated
                 <span className="text-accent">.</span>
               </h1>
-              <p className="max-w-[520px] text-[17px] leading-[1.45] text-text-secondary [text-wrap:pretty] sm:text-[19px]">
+              <p className="max-w-[560px] text-[17px] leading-[1.45] text-text-secondary [text-wrap:pretty] sm:text-[19px]">
                 Start from a template or a one-line brief. Adjust type, color
                 and layout like a designer would. Export for Instagram and
                 Pinterest.
               </p>
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-wrap justify-center gap-3">
                 <PrimaryButton href={GET_URL} target="_blank">
                   Get Modo — {LTD_PRICE}
                 </PrimaryButton>
@@ -185,7 +192,19 @@ export default function Home() {
               </span>
             </div>
 
-            <Collage />
+            <figure className="w-full">
+              <Image
+                src="/screens/editor.png"
+                alt="The Modo editor: template library on the left, an Instagram post on the canvas, and the inspector panel on the right"
+                width={1917}
+                height={866}
+                sizes="(min-width: 1440px) 1328px, 100vw"
+                // The page's LCP element: load it first.
+                loading="eager"
+                fetchPriority="high"
+                className="block h-auto w-full border border-border-strong shadow-paper"
+              />
+            </figure>
           </section>
 
           {/* ── Steps ────────────────────────────────────────────────── */}
@@ -232,6 +251,8 @@ export default function Home() {
                 Modo vs Canva →
               </Link>
             }
+            // The made-in-Modo collage illustrates the template library.
+            figure={<Collage />}
           >
             <div className="grid border-l border-t border-border-default sm:grid-cols-2 xl:grid-cols-3">
               {FEATURES.map(({ title, body, link }, i) => (
@@ -275,8 +296,8 @@ export default function Home() {
             aside={
               <p className="text-[15px] leading-[1.55] text-text-secondary [text-wrap:pretty]">
                 No subscription, no credits, no seats. AI runs on your own
-                Anthropic key, so you pay Anthropic for what you use and
-                nothing to us after today.
+                Anthropic key, so you pay Anthropic for what you use and nothing
+                to us after today.
               </p>
             }
           >
